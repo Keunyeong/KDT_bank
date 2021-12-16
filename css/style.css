@@ -1,0 +1,60 @@
+.phone {
+  margin :auto;
+  width: 375px;
+  height: 812px;
+  border: 2px solid black;
+  position:relative;
+}
+
+.phone > .native {
+  position:absolute;
+  top:0;
+  height: 44px;
+  margin-bottom: 12px;
+  border: 2px solid blue;
+  width: 375px;
+  height: 44px;
+  box-sizing: border-box;
+}
+
+.phone > main {
+  position:absolute;
+  top:56px;
+  width:375px;
+  height: 680px;
+  overflow: scroll;
+  border: 2px solid blue;
+  box-sizing: border-box;
+}
+
+.phone > main > section > .account {
+  height: 297px;
+  border: 2px solid red;
+  box-sizing: border-box;
+}
+
+.phone > main > section > .contents {
+  height: 383px;
+  border: 2px solid red;
+  box-sizing: border-box;
+  overflow:scroll;
+  border-radius: 20px 20px 0 0;
+}
+
+/* 스크롤바 숨기기 */
+.phone > main > section > .contents::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.phone > main > .account__manager {
+  display: none;
+}
+
+.phone > nav {
+  position:absolute;
+  bottom: 0;
+  width: 375px;
+  height: 76px;
+  border: 2px solid blue;
+  box-sizing: border-box;
+}

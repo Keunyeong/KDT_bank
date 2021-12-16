@@ -10,76 +10,102 @@
   <script defer src="js/main.js"></script>
 </head>
 <body>
-  <div class="native"></div>
-  <main>
-    <h1 style="font-size: 0;">자산관리</h1>
-    <section>
-      <div class="accout">
-        <header class="account__header">
-          <div class="avator"></div>
-          <h2>생활비</h2>
-          <a class="scan" href="javascript:void(0)">스캔이미지</a>
-          <a href="javascript:void(0)" class="search">검색이미지</a>
-        </header>
-        <div class="account__main">
-          <h2 style="font-size: 0;">계좌관리</h2>
-          <div class="account__main__box">
-            <div class="account__transfer">
-              <p class="account__number"></p>
-              <a class="account__transfer__btn" href="javascript:void(0)">이체</a>
-            </div>
-            <div class="account__amount__total">
-              <p><span>0</span>원</p>
-            </div>
-            <div class="account__amount">
-              <div class="account__amount__bar">
-                <div class="account__amount__bar__ratio"></div>
-                <div class="account__amount__bar__limit"></div>
+  <div class="phone">
+    <div class="native"></div>
+    <main>
+      <h1 style="font-size: 0;">자산관리</h1>
+      <section>
+        <div class="account">
+          <header class="account__header">
+            <div class="avator"></div>
+            <h2>생활비</h2>
+            <a class="scan" href="javascript:void(0)">스캔이미지</a>
+            <a href="javascript:void(0)" class="search">검색이미지</a>
+          </header>
+          <div class="account__main">
+            <h2 style="font-size: 0;">계좌관리</h2>
+            <div class="account__main__box">
+              <div class="account__transfer">
+                <p class="account__number"></p>
+                <a class="account__transfer__btn" href="javascript:void(0)">이체</a>
               </div>
-              <a class="account__manager__btn" href="javascript:void(0)">지출관리이미지</a>
-            </div>
-            <div class="account__balance__info">
-              <p><span class="account__balance__date">0</span>일 동안 <span class="account__balance">0</span>원 남음</p>
+              <div class="account__amount__total">
+                <p><span>0</span>원</p>
+              </div>
+              <div class="account__amount">
+                <div class="account__amount__bar">
+                  <div class="account__amount__bar__ratio"></div>
+                  <div class="account__amount__bar__limit"></div>
+                </div>
+                <a class="account__manager__btn" href="javascript:void(0)">지출관리이미지</a>
+              </div>
+              <div class="account__balance__info">
+                <p><span class="account__balance__date">0</span>일 동안 <span class="account__balance">0</span>원 남음</p>
+              </div>
             </div>
           </div>
+          <div class="account__ad">
+            <ul class="account__ad__list"></ul>
+          </div>
         </div>
-        <div class="account__ad">
-          <ul class="account__ad__list"></ul>
-        </div>
-      </div>
-      <div class="contents">
-        <div class="contents__money-box">
-          <ul class="contents__money-box__list">
-            <li>
-              <!-- 저금통을 만들면 추가 -->
-              <!-- <div>
-                <div class="money-box__ratio"></div>
-                <p>title</p>
-                <p><span class="money-box__amount">0</span>원</p>
-              </div> -->
-            </li>
-          </ul>
-          <a class="contents__money-box__addBtn" href="javascript:void(0)">저금통 만들기</a>
-        </div>
-        <div class="contents__history">
-          <ul class="contents__history__list">
-            <!-- json을 받아 작성 -->
-            <!-- <li>
-              <ul class="contents__recepts">
-                <li></li>
-              </ul>
-            </li> -->
-          </ul>
-        </div>
-      </div>
-    </section>
 
-  </main>
-  <nav>
-    <a href="javascript:void(0)" class="home">Home</a>
-    <a href="javascript:void(0)" class="next">Next</a>
-    <a href="javascript:void(0)" class="message">Message</a>
-    <a href="javascript:void(0)" class="menu">Menu</a>
-  </nav>
+        <div class="contents">
+          <div class="contents__money-box">
+            <ul class="contents__money-box__list">
+              <li>
+                <!-- 저금통을 만들면 추가 -->
+                <!-- <div>
+                  <div class="money-box__ratio"></div>
+                  <p>title</p>
+                  <p><span class="money-box__amount">0</span>원</p>
+                </div> -->
+              </li>
+            </ul>
+            <a class="contents__money-box__addBtn" href="javascript:void(0)">저금통 만들기</a>
+          </div>
+          <div class="contents__history">
+            <ul class="contents__history__list">
+              <!-- json을 받아 작성 -->
+              <!-- <li>
+                <ul class="contents__receipt">
+                  <li></li>
+                </ul>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <section class="account__manager">
+        <h2>지출관리</h2>
+        <div class="option">
+          <h3>기준금액설정</h3>
+          <input type="number" placeholder="1000"><span>원</span>
+          <div class="option__controller">
+            <div class="option__controller__ratio"></div>
+            <div class="option__controller__limit"></div>
+          </div>
+        </div>
+        <div class="reports">
+          <div class="reports__chart">
+
+          </div>
+          <div class="reports__graph">
+
+          </div>
+          <div class="reports__list">
+
+          </div>
+        </div>
+        <a href="javascript:void(0)">닫기</a>
+      </section>
+    </main>
+    <nav>
+      <a href="javascript:void(0)" class="home">Home</a>
+      <a href="javascript:void(0)" class="next">Next</a>
+      <a href="javascript:void(0)" class="message">Message</a>
+      <a href="javascript:void(0)" class="menu">Menu</a>
+    </nav>
+  </div>
 </body>
 </html>
