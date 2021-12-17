@@ -1,9 +1,12 @@
+
 .phone {
   margin :auto;
   width: 375px;
   height: 812px;
-  border: 2px solid black;
   position:relative;
+  background-color: #EEECE5;
+  border-radius: 40px;
+  overflow:hidden;
 }
 
 .phone > .native {
@@ -15,6 +18,7 @@
   width: 375px;
   height: 44px;
   box-sizing: border-box;
+  border-radius: 40px 40px 0 0 ;
 }
 
 .phone > main {
@@ -22,9 +26,8 @@
   top:56px;
   width:375px;
   height: 680px;
-  overflow: scroll;
-  border: 2px solid blue;
-  box-sizing: border-box;
+  overflow: hidden;
+  
 }
 
 .phone > main > section > .account {
@@ -33,17 +36,153 @@
   box-sizing: border-box;
 }
 
-.phone > main > section > .contents {
-  height: 383px;
+.phone > main > section > .account > .account__header {
+  width: 327px;
+  height: 43px;
   border: 2px solid red;
   box-sizing: border-box;
-  overflow:scroll;
-  border-radius: 20px 20px 0 0;
+  margin: 0 21px 0 27px;
+}
+
+
+.phone > main > section > .account > .account__main {
+  width: 279px;
+  height: 155px;
+  border: 2px solid red;
+  box-sizing: border-box;
+  margin: 33px 48px 0 48px;
+}
+
+.phone > main > section > .account > .account__ad {
+  height: 21px;
+  border: 2px solid red;
+  box-sizing: border-box;
+  margin: 24px 70px 21px 43px;
+}
+
+/* CONTENTS */
+.phone > main > section > .contents {
+  height: 680px;
+  border-radius: 30px 30px 0 0;
+  position:absolute;
+  z-index: 1;
+  background-color: #F5F5F5;
+  transition: 1s ease;
+  top: 297px;
+}
+
+.phone > main > section .big {
+  height: 680px;
+  border-radius: 30px 30px 0 0;
+  position:absolute;
+  z-index: 1;
+  background-color: #F5F5F5;
+  transition: 1s ease;
+  top:0px;
+}
+
+.phone > main > section > .contents > .contents__sizeup {
+  height: 10px;
+  width: 375px;
+  padding: 0 auto;
+  text-align: center;
+}
+
+/* CONTENTS__MONEYBOX */
+.phone > main > section > .contents > .contents__money-box {
+  overflow: scroll;
+  height: 49px;
+  width: 308px;
+  box-sizing: border-box;
+  margin: 23px 37px 17px 30px;
+  border-radius: 6px;
 }
 
 /* 스크롤바 숨기기 */
-.phone > main > section > .contents::-webkit-scrollbar {
+.phone > main > section > .contents > .contents__money-box::-webkit-scrollbar {
+  display:none;
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner {
+  height: 49px;
+  width:auto;
+  display: flex;
+}
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__addBtn {
+  width: 99px;
+  height: 49px;
+  border: 2px solid red;
+  box-sizing: border-box;
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list {
+  
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul {
+  display: flex;
+}
+
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li {
+  margin-right: 13px;
+  display:inline-block;
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div {
+  width: 162px;
+  height: 47px;
+  background-color: #DADADA;
+  border-radius: 6px;
+  position:relative;
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div > .money-box__ratio {
+  width: 100px;
+  height: 47px;
+  background-color: red;
+  border-radius: 6px 0 0 6px;
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div  p:nth-child(2){
+  position: absolute;
+  top:10px;
+  left: 10px;
+  color: #fff;
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div  p:nth-child(3){
+  position: absolute;
+  top:25px;
+  left:10px;
+  color: #fff;
+}
+
+/* CONTENTS__HISTORY */
+.phone > main > section > .contents > .contents__history {
+  width: 302px;
+  height: 575px;
+  overflow:scroll;
+  margin: 0 37px 0 36px;
+}
+
+/* 스크롤바 숨기기 */
+.phone > main > section > .contents > .contents__history::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
+}
+
+.phone > main > section > .contents > .contents__history > .contents__history__list > li {
+  font-weight: 900;
+}
+
+.phone > main > section > .contents > .contents__history > .contents__history__list > li > ul {
+  margin : 10px 0 30px 0 ;
+  font-weight: 400;
+}
+
+.phone > main > section > .contents > .contents__history > .contents__history__list > li > ul > li {
+  display:flex;
+  justify-content: space-between;
 }
 
 .phone > main > .account__manager {
