@@ -8,6 +8,7 @@
     3. 그림대로 각자 마크업을 진행해 주시고, 코드를 짜보니 그림이 바뀌어야 한다고 생각 된다면 중간 중간 회의를 통해 그림을 바꾸고 각 조별로 같은 마크업이 되도록 해주세요.
     ![KDT_BankMarkup](https://user-images.githubusercontent.com/79135142/146382609-84bcb9d8-60c8-4e4a-be24-e183e5ef5cc5.png)
 - Step2. 스타일링
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/79135142/146635544-fc72f598-111d-46be-894f-0289c86fe859.gif)
     1. 각자 어떻게 CSS작업을 할지 디자인 파일을 보면서 분석을 진행해 주세요.  아래 이미지는 구현할 화면들입니다. 다른 계좌간의 달라지는 경우 예를들면 색상옵션을 참고해서 고민해야 합니다. 이 앱은 향후에 더욱더 개인화 계좌 옵션을 강화할 계획이라고 생각하고 코드를 짜는데 참고하세요.
         
         ![슬라이더 라이브러리를 활용한 다른 계좌간 스와이프까지의 화면](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ce2040d3-9dbc-4c38-86f9-e69c7f3cbad3/Untitled.png)
