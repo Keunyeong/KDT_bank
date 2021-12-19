@@ -1,8 +1,44 @@
+const accountHistoryUrl = "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f6e4d3d3-c52c-4ea8-b665-968a3b17c5ea/bank.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211217%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211217T084316Z&X-Amz-Expires=86400&X-Amz-Signature=f53f385c302c470c8f93ab8c115f90f534961bd8c37cd103f6c34f8c73d56ea3&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22bank.json%22&x-id=GetObject";
 const sectionEle = document.querySelector(".contents__history__list");
+const extensionBtn = document.querySelector(".contents__sizeup > a")
+const phoneElem = document.querySelector(".phone");
+let start_y, end_y;
+
+accountHistoryUpload(accountHistoryUrl);
+extensionBtn.addEventListener('touchstart', touch_start);
+phoneElem.addEventListener('touchend', touch_end);
+
+function touch_start(event) {
+  start_y = event.touches[0].pageY;
+}
+
+function touch_end(event) {
+  end_y = event.changedTouches[0].pageY;
+  if(start_y > end_y){
+    contentsExtension();
+  } else {
+    contentsContraction();
+  }
+}
+
+function contentsExtension(){
+  const contents = document.querySelector(".contents");
+  if (!contents.classList.contains("big")){
+    contents.classList.add("big");
+  } 
+}
+function contentsContraction(){
+  const contents = document.querySelector(".contents");
+  if (contents.classList.contains("big")){
+    contents.classList.remove("big");
+  }
+}
+
 function accountHistoryUpload(url){
   fetch(url)
   .then(res=>res.json())
   .then(function(data){
+    data.bankList.reverse();
     const dateArr = [];
     for(let i=0; i < data.bankList.length; i++){
       dateArr.push(data.bankList[i].date);
@@ -43,18 +79,3 @@ function accountHistoryUpload(url){
     }
   })
 }
-
-const accountHistoryUrl = "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f6e4d3d3-c52c-4ea8-b665-968a3b17c5ea/bank.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211217%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211217T084316Z&X-Amz-Expires=86400&X-Amz-Signature=f53f385c302c470c8f93ab8c115f90f534961bd8c37cd103f6c34f8c73d56ea3&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22bank.json%22&x-id=GetObject";
-
-accountHistoryUpload(accountHistoryUrl);
-
-const extenstionBtn = document.querySelector(".contents__sizeup > a")
-
-extenstionBtn.addEventListener("click",function(){
-  const contents = document.querySelector(".contents");
-  if (contents.classList.contains("big")){
-    contents.classList.remove("big");
-  } else {
-    contents.classList.add("big");
-  }
-})

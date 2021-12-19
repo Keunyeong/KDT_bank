@@ -13,7 +13,6 @@
   position:absolute;
   top:0;
   height: 44px;
-  margin-bottom: 12px;
   border: 2px solid blue;
   width: 375px;
   height: 44px;
@@ -27,7 +26,7 @@
   width:375px;
   height: 680px;
   overflow: hidden;
-  
+  padding-top:0px;
 }
 
 .phone > main > section > .account {
@@ -44,19 +43,18 @@
   margin: 0 21px 0 27px;
 }
 
-
 .phone > main > section > .account > .account__main {
   width: 279px;
   height: 155px;
   border: 2px solid red;
   box-sizing: border-box;
   margin: 33px 48px 0 48px;
+  border-radius: 12px;
+  background-color: #fff;
 }
 
 .phone > main > section > .account > .account__ad {
   height: 21px;
-  border: 2px solid red;
-  box-sizing: border-box;
   margin: 24px 70px 21px 43px;
 }
 
@@ -135,13 +133,27 @@
   background-color: #DADADA;
   border-radius: 6px;
   position:relative;
+  overflow: hidden;
 }
 
 .phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div > .money-box__ratio {
-  width: 100px;
   height: 47px;
-  background-color: red;
   border-radius: 6px 0 0 6px;
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li:nth-child(1) > div .money-box__ratio {
+  width: 100px;
+  background-color: #FF5F00;
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li:nth-child(2) > div .money-box__ratio {
+  width: 60px;
+  background-color: #FEB700;
+}
+
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li:nth-child(3) > div .money-box__ratio {
+  width: 160px;
+  background-color: plum;
 }
 
 .phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div  p:nth-child(2){
@@ -177,7 +189,9 @@
 
 .phone > main > section > .contents > .contents__history > .contents__history__list > li > ul {
   margin : 10px 0 30px 0 ;
-  font-weight: 400;
+  font-weight: 350;
+  font-size: 18px;
+  color: #444;
 }
 
 .phone > main > section > .contents > .contents__history > .contents__history__list > li > ul > li {
@@ -189,6 +203,7 @@
   display: none;
 }
 
+/* NAV */
 .phone > nav {
   position:absolute;
   bottom: 0;
@@ -196,4 +211,9 @@
   height: 76px;
   border: 2px solid blue;
   box-sizing: border-box;
+  border-radius: 0 0 40px 40px;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 20px;
 }
