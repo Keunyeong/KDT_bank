@@ -26,7 +26,7 @@
     <main>
       <h1 style="font-size: 0;">자산관리</h1>
       <!-- SECTION -->
-      <section>
+      <section class="sec01">
         <div class="account">
           <!-- HEADER -->
           <header class="account__header">
@@ -34,6 +34,102 @@
               <img src="images/avatar.png" alt="AVATAR">
             </div>
             <h2>생활비</h2>
+            <div class="items">
+              <a class="payment" href="javascript:void(0)">
+                <img src="images/payment_icon.png" alt="PAYMENT_ICON">
+              </a>
+              <a href="javascript:void(0)" class="search">
+                <img src="images/search.png" alt="SEARCH">
+              </a>
+            </div>
+          </header>
+
+          <!-- ACCOUNT -->
+          <div class="account__main">
+            <h2 style="font-size: 0;">계좌관리</h2>
+            <div class="account__main__box">
+              <div class="account__transfer">
+                <p class="account__number">355-673877-78773</p>
+                <a class="account__transfer__btn" href="javascript:void(0)"><span>이체</span></a>
+              </div>
+              <div class="account__amount__total">
+                <p><span>1,240,000</span>원</p>
+              </div>
+              <div class="account__amount">
+                <div class="account__amount__bar">
+                  <div class="account__amount__bar__ratio"></div>
+                </div>
+                <div class="account__amount__bar__limit"></div>
+              </div>
+              <a class="account__manager__btn" href="javascript:void(0)">
+                <img src="images/graph.png" alt="GRAPH">
+              </a>
+              <div class="account__balance__info">
+                <p><span class="account__balance__date">5</span>일 동안 <span class="account__balance">210,000</span>원 남음</p>
+              </div>
+            </div>
+          </div>
+          <div class="account__ad">
+            <ul class="account__ad__list">
+              <li>지금 낮은 이자로 생활대출을 신청하세요! <a href="javascript:void(0)">Go</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sec01 contents">
+          <div class="sec01 contents__sizeup">
+            <a href="javascript:void(0)">
+              <div class="sec01"></div>
+            </a>
+          </div>
+          <div class="contents__money-box">
+            <div class="contents__money-box__list">
+              <!-- 저금통을 만들면 추가 -->
+              <div>
+                <div class="money-box__ratio"></div>
+                <p>title</p>
+                <p><span class="money-box__amount">0</span>원</p>
+              </div>
+              <!-- 저금통을 만들면 추가 -->
+              <div>
+                <div class="money-box__ratio"></div>
+                <p>title</p>
+                <p><span class="money-box__amount">0</span>원</p>
+              </div>
+              <!-- 저금통을 만들면 추가 -->
+              <div>
+                <div class="money-box__ratio"></div>
+                <p>title</p>
+                <p><span class="money-box__amount">0</span>원</p>
+              </div>
+
+              <div class="contents__money-box__addBtn">
+                <img src="images/plusCircle.png" alt="PLUSCIRCLE">
+                <span>저금통 만들기</span>
+              </div>
+            </div>
+          </div>
+          <div class="contents__history">
+            <ul class="sec01 contents__history__list">
+              <!-- json을 받아 작성 -->
+              <!-- <li>
+                <ul class="contents__receipt">
+                  <li></li>
+                </ul>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec02">
+        <div class="account">
+          <!-- HEADER -->
+          <header class="account__header">
+            <div class="avatar">
+              <img src="images/avatar.png" alt="AVATAR">
+            </div>
+            <h2>어머니</h2>
             <div class="items">
               <a class="payment" href="javascript:void(0)">
                 <img src="images/payment_icon.png" alt="PAYMENT_ICON">
@@ -75,10 +171,10 @@
           </div>
         </div>
 
-        <div class="contents">
-          <div class="contents__sizeup">
+        <div class="sec02 contents">
+          <div class="sec02 contents__sizeup">
             <a href="javascript:void(0)">
-              <div></div>
+              <div class="sec02"></div>
             </a>
           </div>
           <div class="contents__money-box">
@@ -109,7 +205,7 @@
             </div>
           </div>
           <div class="contents__history">
-            <ul class="contents__history__list">
+            <ul class="sec02 contents__history__list">
               <!-- json을 받아 작성 -->
               <!-- <li>
                 <ul class="contents__receipt">
@@ -121,101 +217,7 @@
         </div>
       </section>
 
-      <section>
-        <div class="account">
-          <!-- HEADER -->
-          <header class="account__header">
-            <div class="avatar">
-              <img src="images/avatar.png" alt="AVATAR">
-            </div>
-            <h2>생활비</h2>
-            <div class="items">
-              <a class="payment" href="javascript:void(0)">
-                <img src="images/payment_icon.png" alt="PAYMENT_ICON">
-              </a>
-              <a href="javascript:void(0)" class="search">
-                <img src="images/search.png" alt="SEARCH">
-              </a>
-            </div>
-          </header>
-
-          <div class="account__main">
-            <h2 style="font-size: 0;">계좌관리</h2>
-            <div class="account__main__box">
-              <div class="account__transfer">
-                <p class="account__number">355-673877-78773</p>
-                <a class="account__transfer__btn" href="javascript:void(0)"><span>이체</span></a>
-              </div>
-              <div class="account__amount__total">
-                <p><span>1,240,000</span>원</p>
-              </div>
-              <div class="account__amount">
-                <div class="account__amount__bar">
-                  <div class="account__amount__bar__ratio"></div>
-                </div>
-                <div class="account__amount__bar__limit"></div>
-              </div>
-              <a class="account__manager__btn" href="javascript:void(0)">
-                <img src="images/graph.png" alt="GRAPH">
-              </a>
-              <div class="account__balance__info">
-                <p><span class="account__balance__date">5</span>일 동안 <span class="account__balance">210,000</span>원 남음</p>
-              </div>
-            </div>
-          </div>
-          <div class="account__ad">
-            <ul class="account__ad__list">
-              <li>지금 낮은 이자로 생활대출을 신청하세요! <a href="javascript:void(0)">Go</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="contents">
-          <div class="contents__sizeup">
-            <a href="javascript:void(0)">
-              <div></div>
-            </a>
-          </div>
-          <div class="contents__money-box">
-            <div class="contents__money-box__list">
-              <!-- 저금통을 만들면 추가 -->
-              <div>
-                <div class="money-box__ratio"></div>
-                <p>title</p>
-                <p><span class="money-box__amount">0</span>원</p>
-              </div>
-              <!-- 저금통을 만들면 추가 -->
-              <div>
-                <div class="money-box__ratio"></div>
-                <p>title</p>
-                <p><span class="money-box__amount">0</span>원</p>
-              </div>
-              <!-- 저금통을 만들면 추가 -->
-              <div>
-                <div class="money-box__ratio"></div>
-                <p>title</p>
-                <p><span class="money-box__amount">0</span>원</p>
-              </div>
-
-              <div class="contents__money-box__addBtn">
-                <img src="images/plusCircle.png" alt="PLUSCIRCLE">
-                <span>저금통 만들기</span>
-              </div>
-            </div>
-          </div>
-          <div class="contents__history">
-            <ul class="contents__history__list">
-              <!-- json을 받아 작성 -->
-              <!-- <li>
-                <ul class="contents__receipt">
-                  <li></li>
-                </ul>
-              </li> -->
-            </ul>
-          </div>
-        </div>
-      </section>
-      
+      <!-- ACCOUNT__MANAGER__PAGE -->
       <section class="account__manager">
         <h2>지출관리</h2>
         <div class="option">
@@ -239,7 +241,9 @@
         </div>
         <a href="javascript:void(0)">닫기</a>
       </section>
+
     </main>
+
 
     <!-- NAV -->
     <nav>
