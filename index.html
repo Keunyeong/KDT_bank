@@ -11,84 +11,195 @@
 </head>
 <body>
   <div class="phone">
-    <div class="native"></div>
+    <!-- NATIVE -->
+    <div class="native">
+      <div class="time">
+        <img src="images/Time Style.png" alt="TIME">
+      </div>
+      <div class="items">
+        <img src="images/Cellular Connection.png" alt="CELLULAR">
+        <img src="images/Wifi.png" alt="WIFI">
+        <img src="images/Battery.png" alt="BATTERY">
+      </div>
+    </div>
+    <!-- MAIN -->
     <main>
       <h1 style="font-size: 0;">자산관리</h1>
+      <!-- SECTION -->
       <section>
         <div class="account">
+          <!-- HEADER -->
           <header class="account__header">
-            <div class="avator"></div>
+            <div class="avatar">
+              <img src="images/avatar.png" alt="AVATAR">
+            </div>
             <h2>생활비</h2>
-            <a class="scan" href="javascript:void(0)">스캔이미지</a>
-            <a href="javascript:void(0)" class="search">검색이미지</a>
+            <div class="items">
+              <a class="payment" href="javascript:void(0)">
+                <img src="images/payment_icon.png" alt="PAYMENT_ICON">
+              </a>
+              <a href="javascript:void(0)" class="search">
+                <img src="images/search.png" alt="SEARCH">
+              </a>
+            </div>
           </header>
+
           <div class="account__main">
             <h2 style="font-size: 0;">계좌관리</h2>
             <div class="account__main__box">
               <div class="account__transfer">
-                <p class="account__number">계좌번호</p>
-                <a class="account__transfer__btn" href="javascript:void(0)">이체</a>
+                <p class="account__number">355-673877-78773</p>
+                <a class="account__transfer__btn" href="javascript:void(0)"><span>이체</span></a>
               </div>
               <div class="account__amount__total">
-                <p><span>0</span>원</p>
+                <p><span>1,240,000</span>원</p>
               </div>
               <div class="account__amount">
                 <div class="account__amount__bar">
                   <div class="account__amount__bar__ratio"></div>
-                  <div class="account__amount__bar__limit"></div>
                 </div>
-                <a class="account__manager__btn" href="javascript:void(0)">지출관리이미지</a>
+                <div class="account__amount__bar__limit"></div>
               </div>
+              <a class="account__manager__btn" href="javascript:void(0)">
+                <img src="images/graph.png" alt="GRAPH">
+              </a>
               <div class="account__balance__info">
-                <p><span class="account__balance__date">0</span>일 동안 <span class="account__balance">0</span>원 남음</p>
+                <p><span class="account__balance__date">5</span>일 동안 <span class="account__balance">210,000</span>원 남음</p>
               </div>
             </div>
           </div>
           <div class="account__ad">
             <ul class="account__ad__list">
-              <li>광고광고광고광고광고광고광고광고</li>
+              <li>지금 낮은 이자로 생활대출을 신청하세요! <a href="javascript:void(0)">Go</a></li>
             </ul>
           </div>
         </div>
 
         <div class="contents">
           <div class="contents__sizeup">
-            <a href="javascript:void(0)">키우기</a>
+            <a href="javascript:void(0)">
+              <div></div>
+            </a>
           </div>
           <div class="contents__money-box">
-            <div class="contents__money-box__inner">
-              <div class="contents__money-box__list">
-                <ul>
-                  <li>
-                    <!-- 저금통을 만들면 추가 -->
-                    <div>
-                      <div class="money-box__ratio"></div>
-                      <p>title</p>
-                      <p><span class="money-box__amount">0</span>원</p>
-                    </div>
-                  </li>
-                  <li>
-                    <!-- 저금통을 만들면 추가 -->
-                    <div>
-                      <div class="money-box__ratio"></div>
-                      <p>title</p>
-                      <p><span class="money-box__amount">0</span>원</p>
-                    </div>
-                  </li>
-                  <li>
-                    <!-- 저금통을 만들면 추가 -->
-                    <div>
-                      <div class="money-box__ratio"></div>
-                      <p>title</p>
-                      <p><span class="money-box__amount">0</span>원</p>
-                    </div>
-                  </li>
-                </ul>
+            <div class="contents__money-box__list">
+              <!-- 저금통을 만들면 추가 -->
+              <div>
+                <div class="money-box__ratio"></div>
+                <p>title</p>
+                <p><span class="money-box__amount">0</span>원</p>
               </div>
-              <div class="contents__money-box__addBtn" href="javascript:void(0)">
-                <div>
-                  저금통 만들기
+              <!-- 저금통을 만들면 추가 -->
+              <div>
+                <div class="money-box__ratio"></div>
+                <p>title</p>
+                <p><span class="money-box__amount">0</span>원</p>
+              </div>
+              <!-- 저금통을 만들면 추가 -->
+              <div>
+                <div class="money-box__ratio"></div>
+                <p>title</p>
+                <p><span class="money-box__amount">0</span>원</p>
+              </div>
+
+              <div class="contents__money-box__addBtn">
+                <img src="images/plusCircle.png" alt="PLUSCIRCLE">
+                <span>저금통 만들기</span>
+              </div>
+            </div>
+          </div>
+          <div class="contents__history">
+            <ul class="contents__history__list">
+              <!-- json을 받아 작성 -->
+              <!-- <li>
+                <ul class="contents__receipt">
+                  <li></li>
+                </ul>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="account">
+          <!-- HEADER -->
+          <header class="account__header">
+            <div class="avatar">
+              <img src="images/avatar.png" alt="AVATAR">
+            </div>
+            <h2>생활비</h2>
+            <div class="items">
+              <a class="payment" href="javascript:void(0)">
+                <img src="images/payment_icon.png" alt="PAYMENT_ICON">
+              </a>
+              <a href="javascript:void(0)" class="search">
+                <img src="images/search.png" alt="SEARCH">
+              </a>
+            </div>
+          </header>
+
+          <div class="account__main">
+            <h2 style="font-size: 0;">계좌관리</h2>
+            <div class="account__main__box">
+              <div class="account__transfer">
+                <p class="account__number">355-673877-78773</p>
+                <a class="account__transfer__btn" href="javascript:void(0)"><span>이체</span></a>
+              </div>
+              <div class="account__amount__total">
+                <p><span>1,240,000</span>원</p>
+              </div>
+              <div class="account__amount">
+                <div class="account__amount__bar">
+                  <div class="account__amount__bar__ratio"></div>
                 </div>
+                <div class="account__amount__bar__limit"></div>
+              </div>
+              <a class="account__manager__btn" href="javascript:void(0)">
+                <img src="images/graph.png" alt="GRAPH">
+              </a>
+              <div class="account__balance__info">
+                <p><span class="account__balance__date">5</span>일 동안 <span class="account__balance">210,000</span>원 남음</p>
+              </div>
+            </div>
+          </div>
+          <div class="account__ad">
+            <ul class="account__ad__list">
+              <li>지금 낮은 이자로 생활대출을 신청하세요! <a href="javascript:void(0)">Go</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contents">
+          <div class="contents__sizeup">
+            <a href="javascript:void(0)">
+              <div></div>
+            </a>
+          </div>
+          <div class="contents__money-box">
+            <div class="contents__money-box__list">
+              <!-- 저금통을 만들면 추가 -->
+              <div>
+                <div class="money-box__ratio"></div>
+                <p>title</p>
+                <p><span class="money-box__amount">0</span>원</p>
+              </div>
+              <!-- 저금통을 만들면 추가 -->
+              <div>
+                <div class="money-box__ratio"></div>
+                <p>title</p>
+                <p><span class="money-box__amount">0</span>원</p>
+              </div>
+              <!-- 저금통을 만들면 추가 -->
+              <div>
+                <div class="money-box__ratio"></div>
+                <p>title</p>
+                <p><span class="money-box__amount">0</span>원</p>
+              </div>
+
+              <div class="contents__money-box__addBtn">
+                <img src="images/plusCircle.png" alt="PLUSCIRCLE">
+                <span>저금통 만들기</span>
               </div>
             </div>
           </div>
@@ -129,11 +240,24 @@
         <a href="javascript:void(0)">닫기</a>
       </section>
     </main>
+
+    <!-- NAV -->
     <nav>
-      <a href="javascript:void(0)" class="home">Home</a>
-      <a href="javascript:void(0)" class="next">Next</a>
-      <a href="javascript:void(0)" class="message">Message</a>
-      <a href="javascript:void(0)" class="menu">Menu</a>
+      <a href="javascript:void(0)" class="home">
+        <img src="images/home.png" alt="HOME">
+      </a>
+      <a href="javascript:void(0)" class="next">
+        <div>
+          <img src="images/arrow_left.png" alt="ARROW_LEFT">
+          <img src="images/arrow_right.png" alt="ARROW_RIGHT">
+        </div>
+      </a>
+      <a href="javascript:void(0)" class="message">
+        <img src="images/message.png" alt="MESSAGE">
+      </a>
+      <a href="javascript:void(0)" class="menu">
+        <img src="images/menu.png" alt="MENU">
+      </a>
     </nav>
   </div>
 </body>

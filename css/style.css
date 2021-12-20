@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+  color: black;
+}
 
 .phone {
   margin :auto;
@@ -7,19 +11,33 @@
   background-color: #EEECE5;
   border-radius: 40px;
   overflow:hidden;
+  font-family: Noto Sans CJK KR;
 }
 
+/* NATIVE */
 .phone > .native {
   position:absolute;
   top:0;
   height: 44px;
-  border: 2px solid blue;
   width: 375px;
   height: 44px;
-  box-sizing: border-box;
   border-radius: 40px 40px 0 0 ;
 }
 
+.phone > .native > .time {
+  position: absolute;
+  top: 7px;
+  left: 21px;
+}
+
+.phone > .native > .items {
+  position: absolute;
+  top: 17.33px;
+  right: 14.34px;
+}
+
+
+/* MAIN */
 .phone > main {
   position:absolute;
   top:56px;
@@ -29,33 +47,151 @@
   padding-top:0px;
 }
 
+.phone > main section:nth-child(2) {
+  position: absolute;
+  left: 375px;
+}
+
 .phone > main > section > .account {
   height: 297px;
-  border: 2px solid red;
-  box-sizing: border-box;
 }
 
 .phone > main > section > .account > .account__header {
   width: 327px;
   height: 43px;
-  border: 2px solid red;
-  box-sizing: border-box;
   margin: 0 21px 0 27px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.phone > main > section > .account > .account__header > h2 {
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.phone > main > section > .account > .account__header > .items > .payment {
+  margin-right: 18px;
 }
 
 .phone > main > section > .account > .account__main {
   width: 279px;
   height: 155px;
-  border: 2px solid red;
-  box-sizing: border-box;
   margin: 33px 48px 0 48px;
   border-radius: 12px;
   background-color: #fff;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
+.phone > main > section > .account > .account__main > .account__main__box {
+  height: 155px;
+}
+
+.phone > main > section > .account > .account__main > .account__main__box > .account__transfer {
+  margin-top: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.phone > main > section > .account > .account__main > .account__main__box > .account__transfer > p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20.72px;
+  color: #858585;
+}
+
+.phone > main > section > .account > .account__main > .account__main__box > .account__transfer > .account__transfer__btn {
+  position:absolute;
+  top:14px;
+  right:17px;
+}
+
+.phone > main > section > .account > .account__main > .account__main__box > .account__transfer > .account__transfer__btn > span {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20.72px;
+}
+
+.phone > main > section > .account > .account__main > .account__main__box > .account__amount__total {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.phone > main > section > .account > .account__main > .account__main__box > .account__amount__total > p > span {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.phone > main > section > .account > .account__main > .account__main__box > .account__amount {
+  text-align: center;
+  margin-bottom: 8px;
+  position: relative;
+  height: 17px;
+}
+.phone > main > section > .account > .account__main > .account__main__box > .account__amount > .account__amount__bar{
+  width: 202px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #c4c4c4;
+  position:relative;
+  overflow: hidden;
+}
+.phone > main > section > .account > .account__main > .account__main__box > .account__amount > .account__amount__bar > .account__amount__bar__ratio{
+  width: 150px;
+  height: 6px;
+  position: absolute;
+  top:0;
+  left:0;
+  border-radius: 3px 0 0 3px;
+  background-color: #FFDB4C;
+}
+.phone > main > section > .account > .account__main > .account__main__box > .account__amount > .account__amount__bar__limit{
+  position: absolute;
+  width:4px;
+  height: 17px;
+  background-color: #FF5F00;
+  top: -6px;
+  left: 150px;
+  border-radius: 3px;
+  border: 1px solid #fff
+}
+
+.phone > main > section > .account > .account__main > .account__main__box >  .account__manager__btn{
+  position: absolute;
+  top: 98px;
+  right: 14px;
+}
+
+.phone > main > section > .account > .account__main > .account__main__box > .account__balance__info {
+  text-align: center;
+  line-height: 21px;
+}
+
+.phone > main > section > .account > .account__main > .account__main__box > .account__balance__info > p {
+  line-height: 21px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #858585;
+}
+
+/* AD */
 .phone > main > section > .account > .account__ad {
   height: 21px;
   margin: 24px 70px 21px 43px;
+  text-align: center;
+}
+
+.phone > main > section > .account > .account__ad > ul > li {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-around;
+}
+.phone > main > section > .account > .account__ad > ul > li > a {
+  text-decoration: underline;
 }
 
 /* CONTENTS */
@@ -83,7 +219,14 @@
   height: 10px;
   width: 375px;
   padding: 0 auto;
-  text-align: center;
+}
+
+.phone > main > section > .contents > .contents__sizeup > a > div {
+  width: 48px;
+  height: 2.15px;
+  border-radius: 2px;
+  background-color: #c4c4c4;
+  margin: 4.3px 162px 30px 162px;
 }
 
 /* CONTENTS__MONEYBOX */
@@ -101,69 +244,63 @@
   display:none;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner {
-  height: 49px;
-  width:auto;
-  display: flex;
-}
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__addBtn {
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list > .contents__money-box__addBtn {
   width: 99px;
   height: 49px;
-  border: 2px solid red;
-  box-sizing: border-box;
-}
-
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list {
-  
-}
-
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul {
+  background-color: #F5F5F5;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list > .contents__money-box__addBtn > span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #FF5F00;
 }
 
-
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li {
-  margin-right: 13px;
-  display:inline-block;
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list {
+  display: flex;
+  width:fit-content;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div {
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list > div {
   width: 162px;
   height: 47px;
+  margin-left: 13px;
   background-color: #DADADA;
   border-radius: 6px;
   position:relative;
   overflow: hidden;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div > .money-box__ratio {
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list > div > .money-box__ratio {
   height: 47px;
   border-radius: 6px 0 0 6px;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li:nth-child(1) > div .money-box__ratio {
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list  div:nth-child(1) > .money-box__ratio {
   width: 100px;
   background-color: #FF5F00;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li:nth-child(2) > div .money-box__ratio {
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list  div:nth-child(2) > .money-box__ratio {
   width: 60px;
   background-color: #FEB700;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li:nth-child(3) > div .money-box__ratio {
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list  div:nth-child(3) > .money-box__ratio {
   width: 160px;
   background-color: plum;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div  p:nth-child(2){
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list > div p:nth-child(2){
   position: absolute;
   top:10px;
   left: 10px;
   color: #fff;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__inner > .contents__money-box__list > ul > li > div  p:nth-child(3){
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list >  div p:nth-child(3){
   position: absolute;
   top:25px;
   left:10px;
@@ -209,11 +346,20 @@
   bottom: 0;
   width: 375px;
   height: 76px;
-  border: 2px solid blue;
-  box-sizing: border-box;
   border-radius: 0 0 40px 40px;
   display:flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0 20px;
+  background: linear-gradient(163.63deg, #00BDB2 11.35%, #C4E7B8 139.96%);
 }
+
+.phone > nav > .next > div {
+  position: relative;
+}
+
+.phone > nav > .next > div img:nth-child(1) {
+  position: absolute;
+  top: 6px;
+  left: -12px;
+}
+
