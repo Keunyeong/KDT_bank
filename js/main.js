@@ -16,7 +16,6 @@ sections.forEach((section,index)=>{
   section.children[0].addEventListener('touchstart',slide_start);
   section.children[0].addEventListener('touchend',(event)=>{ slide_end(event, index) });
   section.children[1].children[1].children[0].lastElementChild.addEventListener('click',()=>{
-    console.log(section.children[2].children[4].children[1]);
     section.children[2].style.zIndex=5;
   });
   section.children[2].children[4].children[1].addEventListener('click',()=>{
@@ -28,22 +27,40 @@ sections.forEach((section,index)=>{
 });
 
 function fundingMoneyBox(section, num){
-  console.log(section.children[1].children[1].children[0].children.length);
   if(num === -1){
     for(let i=0; i<section.children[1].children[1].children[0].children.length-1; i++){
       section.children[1].children[1].children[0].children[i].addEventListener('click',(event)=>{
-        console.log(section.children[1].children[1].children[0].children[i].children);
-        let ratio = section.children[1].children[1].children[0].children[i].children[0];
-        let fundAmount = section.children[1].children[1].children[0].children[i].children[2];
-        console.log(fundAmount.children[0].innertext);
+        pushMoneyBox(i, section);
       })
     };
   } else {
     for(let i=num; i<section.children[1].children[1].children[0].children.length-1; i++){
       section.children[1].children[1].children[0].children[i].addEventListener('click',(event)=>{
-        console.log(event);
+        pushMoneyBox(i, section);
       })
     };
+  }
+}
+
+function pushMoneyBox(i, section){
+  const ratio = section.children[1].children[1].children[0].children[i].children[0];
+  const fundAmount = section.children[1].children[1].children[0].children[i].children[2];
+  const fundAmount2 = section.children[1].children[1].children[0].children[i].children[4];
+  const targetAmount = section.children[1].children[1].children[0].children[i].children[3];
+  const totalAmountElem = section.children[0].children[1].children[1].children[1].children[0].children[0];
+  const totalAmount2Elem = section.children[0].children[1].children[1].children[1].children[0].children[1];
+  if(Number(fundAmount.children[0].innerText)>=Number(targetAmount.innerText)){
+    console.log("FULL")
+  } else {
+    totalAmount2Elem.innerText -= 5000;
+    totalAmountElem.innerText = Number(totalAmount2Elem.innerText).toLocaleString('ko-KR');
+    let fundNum = Number(fundAmount2.children[0].innerText)+5000;
+    console.log(fundNum);
+    fundAmount2.children[0].innerText = fundNum
+    fundAmount.children[0].innerText = fundNum.toLocaleString('ko-KR');
+    let ratioNum = Number(fundAmount2.children[0].innerText)/Number(targetAmount.innerText)*100;
+    ratio.style.width = ratioNum+"%";
+    console.log(totalAmountElem.innerText);
   }
 }
 
@@ -65,17 +82,23 @@ function addMoneyBox(event, section, index){
     const MBLiRatioElem = document.createElement('div');
     const MBLiTitleElem = document.createElement('p');
     const MBLiFundElem = document.createElement('p');
-    const MBLiFundSpanElem = document.createElement('span');
+    const MBLiTargetElem = document.createElement('p');
+    const MBLiFund2Elem = document.createElement('p');
     const fundAmount = 0;
+    MBLiTargetElem.innerText=targetAmount;
+    MBLiTargetElem.style.display="none";
+    MBLiFund2Elem.innerHTML=`<span>${fundAmount}</span>원`;
+    MBLiFund2Elem.style.display="none";
     MBLiRatioElem.classList.add("money-box__ratio");
     MBLiTitleElem.textContent = title;
-    MBLiFundSpanElem.textContent = fundAmount+"원";
     MBLiRatioElem.style.width=fundAmount+"%";
     MBLiRatioElem.style.backgroundColor=color[index][num];
-    MBLiFundElem.appendChild(MBLiFundSpanElem);
+    MBLiFundElem.innerHTML=`<span>${fundAmount.toLocaleString('ko-KR')}</span>원`;
     MBLiDivElem.appendChild(MBLiRatioElem);
     MBLiDivElem.appendChild(MBLiTitleElem);
     MBLiDivElem.appendChild(MBLiFundElem);
+    MBLiDivElem.appendChild(MBLiTargetElem);
+    MBLiDivElem.appendChild(MBLiFund2Elem);
     section.children[1].children[1].children[0].lastElementChild.before(MBLiDivElem);
     titleElem.value = '';
     targetAmountElem.value = '';
@@ -159,7 +182,9 @@ function accountHistoryUpload(AccountUrl, section, index){
     const accountMainElem = accountElem.children[1];
     const accountNumElem = accountMainElem.children[1].children[0].children[0];
     const accountTotalAmountElem = accountMainElem.children[1].children[1].children[0].children[0];
+    const accountTotalAmount2Elem = accountMainElem.children[1].children[1].children[0].children[1];
     accountNumElem.textContent = data.accountNumber;
+    accountTotalAmount2Elem.textContent = Number(data.deposit);
     accountTotalAmountElem.textContent = (Number(data.deposit)).toLocaleString('ko-KR');
     //CONTENTS
     const contentsElem = section.children[1];
@@ -172,17 +197,23 @@ function accountHistoryUpload(AccountUrl, section, index){
       const MBLiRatioElem = document.createElement('div');
       const MBLiTitleElem = document.createElement('p');
       const MBLiFundElem = document.createElement('p');
-      const MBLiFundSpanElem = document.createElement('span');
+      const MBLiTargetElem = document.createElement('p');
+      const MBLiFund2Elem = document.createElement('p');
       const fundAmount = (Number(obj.fundAmount))/(Number(obj.targetAmount))*100;
+      MBLiTargetElem.innerText=obj.targetAmount;
+      MBLiTargetElem.style.display="none";
+      MBLiFund2Elem.innerHTML=`<span>${obj.fundAmount}</span>원`;
+      MBLiFund2Elem.style.display="none";
       MBLiRatioElem.classList.add("money-box__ratio");
       MBLiTitleElem.textContent = obj.title;
-      MBLiFundSpanElem.textContent = obj.fundAmount+"원";
       MBLiRatioElem.style.width=fundAmount+"%";
       MBLiRatioElem.style.backgroundColor=color[index][num];
-      MBLiFundElem.appendChild(MBLiFundSpanElem);
+      MBLiFundElem.innerHTML=`<span>${obj.fundAmount.toLocaleString('ko-KR')}</span>원`;
       MBLiDivElem.appendChild(MBLiRatioElem);
       MBLiDivElem.appendChild(MBLiTitleElem);
       MBLiDivElem.appendChild(MBLiFundElem);
+      MBLiDivElem.appendChild(MBLiTargetElem);
+      MBLiDivElem.appendChild(MBLiFund2Elem);
       contentsMoneyboxAddBtn.before(MBLiDivElem);
     })
     // HISTORY

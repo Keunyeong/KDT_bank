@@ -335,7 +335,7 @@ a {
 
 .phone > main > section > .contents > .contents__money-box > .contents__money-box__list  div > .money-box__ratio {
   width: 0%;
-  transition: 2s ease;
+  transition: 1s ease;
   background-color: #FF5F00;
 }
 
