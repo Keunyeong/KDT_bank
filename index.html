@@ -31,9 +31,9 @@
           <!-- HEADER -->
           <header class="account__header">
             <div class="avatar">
-              <img src="images/avatar.png" alt="AVATAR">
+              <img src="" alt="AVATAR">
             </div>
-            <h2>생활비</h2>
+            <h2></h2>
             <div class="items">
               <a class="payment" href="javascript:void(0)">
                 <img src="images/payment_icon.png" alt="PAYMENT_ICON">
@@ -49,11 +49,11 @@
             <h2 style="font-size: 0;">계좌관리</h2>
             <div class="account__main__box">
               <div class="account__transfer">
-                <p class="account__number">355-673877-78773</p>
+                <p class="account__number"></p>
                 <a class="account__transfer__btn" href="javascript:void(0)"><span>이체</span></a>
               </div>
               <div class="account__amount__total">
-                <p><span>1,240,000</span>원</p>
+                <p><span></span>원</p>
               </div>
               <div class="account__amount">
                 <div class="account__amount__bar">
@@ -85,24 +85,11 @@
           <div class="contents__money-box">
             <div class="contents__money-box__list">
               <!-- 저금통을 만들면 추가 -->
-              <div>
+              <!-- <div>
                 <div class="money-box__ratio"></div>
                 <p>title</p>
                 <p><span class="money-box__amount">0</span>원</p>
-              </div>
-              <!-- 저금통을 만들면 추가 -->
-              <div>
-                <div class="money-box__ratio"></div>
-                <p>title</p>
-                <p><span class="money-box__amount">0</span>원</p>
-              </div>
-              <!-- 저금통을 만들면 추가 -->
-              <div>
-                <div class="money-box__ratio"></div>
-                <p>title</p>
-                <p><span class="money-box__amount">0</span>원</p>
-              </div>
-
+              </div> -->
               <div class="contents__money-box__addBtn">
                 <img src="images/plusCircle.png" alt="PLUSCIRCLE">
                 <span>저금통 만들기</span>
@@ -118,6 +105,18 @@
                 </ul>
               </li> -->
             </ul>
+          </div>
+        </div>
+
+        <!-- ADD MONEY BOX -->
+        <div class="add__money__box">
+          <label for="title">저금통 이름</label>
+          <input type="text" id="titile" placeholder="여행자금">
+          <label for="targetAmount">목표금액</label>
+          <input type="number" id="targetAmount" placeholder="100000">
+          <div>
+            <a class="btn add" href="javascrip:void(0)">추가</a>
+            <a class="btn cancel" href="javascrip:void(0)">취소</a>
           </div>
         </div>
       </section>
@@ -180,24 +179,6 @@
           <div class="contents__money-box">
             <div class="contents__money-box__list">
               <!-- 저금통을 만들면 추가 -->
-              <div>
-                <div class="money-box__ratio"></div>
-                <p>title</p>
-                <p><span class="money-box__amount">0</span>원</p>
-              </div>
-              <!-- 저금통을 만들면 추가 -->
-              <div>
-                <div class="money-box__ratio"></div>
-                <p>title</p>
-                <p><span class="money-box__amount">0</span>원</p>
-              </div>
-              <!-- 저금통을 만들면 추가 -->
-              <div>
-                <div class="money-box__ratio"></div>
-                <p>title</p>
-                <p><span class="money-box__amount">0</span>원</p>
-              </div>
-
               <div class="contents__money-box__addBtn">
                 <img src="images/plusCircle.png" alt="PLUSCIRCLE">
                 <span>저금통 만들기</span>
@@ -215,10 +196,22 @@
             </ul>
           </div>
         </div>
+
+        <!-- ADD MONEY BOX -->
+        <div class="add__money__box">
+          <label for="title">저금통 이름</label>
+          <input type="text" id="titile" placeholder="여행자금">
+          <label for="targetAmount">목표금액</label>
+          <input type="number" id="targetAmount" placeholder="100000">
+          <div>
+            <a class="btn add" href="javascrip:void(0)">추가</a>
+            <a class="btn cancel" href="javascrip:void(0)">취소</a>
+          </div>
+        </div>
       </section>
 
       <!-- ACCOUNT__MANAGER__PAGE -->
-      <section class="account__manager">
+      <div class="account__manager">
         <h2>지출관리</h2>
         <div class="option">
           <h3>기준금액설정</h3>
@@ -240,11 +233,8 @@
           </div>
         </div>
         <a href="javascript:void(0)">닫기</a>
-      </section>
-
+      </div>
     </main>
-
-
     <!-- NAV -->
     <nav>
       <a href="javascript:void(0)" class="home">

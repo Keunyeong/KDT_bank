@@ -1,6 +1,33 @@
+body {
+  background-color: #222;
+}
 a {
   text-decoration: none;
   color: black;
+  vertical-align: bottom;
+}
+.btn {
+  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  background-color: black;
+  color: #DADADA;
+  font-weight: 900;
+  border-radius: 10px;
+  vertical-align: bottom;
+  box-shadow: 3px 1px 0.1em black;
+}
+
+.btn:active {
+  box-shadow: none;
+}
+
+.btn.add {
+  background-color: #039be5;
+}
+
+.btn.cancel {
+  background-color: #f50057;
 }
 
 .phone {
@@ -45,6 +72,33 @@ a {
   height: 680px;
   overflow: hidden;
   padding-top:0px;
+}
+
+.phone > main > section > .add__money__box {
+  width : 230px;
+  height : 150px;
+  position : absolute;
+  top : 200px;
+  left : 52.5px;
+  background-color: #c4c4c4;
+  text-align: center;
+  border-radius: 30px;
+  padding: 20px;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone > main > section > .add__money__box > label {
+  text-align: left;
+  margin : 10px 0;
+}
+
+.phone > main > section > .add__money__box > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 15px;
 }
 
 .phone > main > .sec01 {
@@ -279,20 +333,12 @@ a {
   border-radius: 6px 0 0 6px;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__list  div:nth-child(1) > .money-box__ratio {
-  width: 100px;
+.phone > main > section > .contents > .contents__money-box > .contents__money-box__list  div > .money-box__ratio {
+  width: 0%;
+  transition: 2s ease;
   background-color: #FF5F00;
 }
 
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__list  div:nth-child(2) > .money-box__ratio {
-  width: 60px;
-  background-color: #FEB700;
-}
-
-.phone > main > section > .contents > .contents__money-box > .contents__money-box__list  div:nth-child(3) > .money-box__ratio {
-  width: 160px;
-  background-color: plum;
-}
 
 .phone > main > section > .contents > .contents__money-box > .contents__money-box__list > div p:nth-child(2){
   position: absolute;
@@ -314,6 +360,7 @@ a {
   height: 575px;
   overflow:scroll;
   margin: 0 37px 0 36px;
+  padding-top: 1px;
 }
 
 /* 스크롤바 숨기기 */
