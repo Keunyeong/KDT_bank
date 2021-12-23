@@ -60,18 +60,19 @@
                   <div class="account__amount__bar__ratio"></div>
                 </div>
                 <div class="account__amount__bar__limit"></div>
+                <span style="display:none"></span>
               </div>
               <a class="account__manager__btn" href="javascript:void(0)">
                 <img src="images/graph.png" alt="GRAPH">
               </a>
               <div class="account__balance__info">
-                <p><span class="account__balance__date">5</span>일 동안 <span class="account__balance">210,000</span>원 남음</p>
+                <p><span class="account__balance__date">5</span>일 동안 <span class="account__balance">210,000</span><span style="display:none"></span> 원 남음</p>
               </div>
             </div>
           </div>
           <div class="account__ad">
             <ul class="account__ad__list">
-              <li>지금 낮은 이자로 생활대출을 신청하세요! <a href="javascript:void(0)">Go</a></li>
+              <li><span></span>원 지금 바로 투자하세요! <a href="javascript:void(0)">Go</a></li>
             </ul>
           </div>
         </div>
@@ -154,18 +155,19 @@
                   <div class="account__amount__bar__ratio"></div>
                 </div>
                 <div class="account__amount__bar__limit"></div>
+                <span style="display:none"></span>
               </div>
               <a class="account__manager__btn" href="javascript:void(0)">
                 <img src="images/graph.png" alt="GRAPH">
               </a>
               <div class="account__balance__info">
-                <p><span class="account__balance__date">5</span>일 동안 <span class="account__balance">210,000</span>원 남음</p>
+                <p><span class="account__balance__date">5</span>일 동안 <span class="account__balance">210,000</span><span style="display:none"></span>원 남음</p>
               </div>
             </div>
           </div>
           <div class="account__ad">
             <ul class="account__ad__list">
-              <li>지금 낮은 이자로 생활대출을 신청하세요! <a href="javascript:void(0)">Go</a></li>
+              <li><span></span>원 지금 바로 투자하세요!   <a href="javascript:void(0)">Go</a></li>
             </ul>
           </div>
         </div>
@@ -212,28 +214,45 @@
 
       <!-- ACCOUNT__MANAGER__PAGE -->
       <div class="account__manager">
-        <h2>지출관리</h2>
+        <header>
+          <h2>지출관리</h2>
+        </header>
         <div class="option">
-          <h3>기준금액설정</h3>
-          <input type="number" placeholder="1000"><span>원</span>
-          <div class="option__controller">
-            <div class="option__controller__ratio"></div>
+          <div>
+            <h3>기준금액설정</h3>
+            <div>
+              <input type="number" placeholder="1000"><span>원</span>
+            </div>
+          </div>
+          <div class="option__controller__box">
+            <div class="option__controller">
+              <div class="option__controller__ratio"></div>
+            </div>
             <div class="option__controller__limit"></div>
           </div>
         </div>
         <div class="reports">
           <div class="reports__chart">
+            <div>
+              <h3>일간 리포트</h3>
+            </div>
+            <div class="chart">
 
+            </div>
           </div>
           <div class="reports__graph">
-
+            <div>
+              <h3><span>12</span>월 지출패턴</h3>
+            </div>
+            <div class="graph"></div>
+            <div class="reports__contents"></div>
           </div>
-          <div class="reports__list">
-
-          </div>
+          
         </div>
         <a href="javascript:void(0)">닫기</a>
       </div>
+
+
     </main>
     <!-- NAV -->
     <nav>

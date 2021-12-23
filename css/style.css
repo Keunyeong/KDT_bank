@@ -73,6 +73,10 @@ a {
   overflow: hidden;
   padding-top:0px;
 }
+/* 삭제해야함 */
+.phone > main > section {
+  z-index: 3;
+}
 
 .phone > main > section > .add__money__box {
   width : 230px;
@@ -192,6 +196,7 @@ a {
   margin-bottom: 8px;
   position: relative;
   height: 17px;
+  width:fit-content;
 }
 .phone > main > section > .account > .account__main > .account__main__box > .account__amount > .account__amount__bar{
   width: 202px;
@@ -202,7 +207,7 @@ a {
   overflow: hidden;
 }
 .phone > main > section > .account > .account__main > .account__main__box > .account__amount > .account__amount__bar > .account__amount__bar__ratio{
-  width: 150px;
+  width: 0%;
   height: 6px;
   position: absolute;
   top:0;
@@ -216,7 +221,7 @@ a {
   height: 17px;
   background-color: #FF5F00;
   top: -6px;
-  left: 150px;
+  left: -1%;
   border-radius: 3px;
   border: 1px solid #fff
 }
@@ -248,11 +253,10 @@ a {
 
 .phone > main > section > .account > .account__ad > ul > li {
   font-size: 14px;
-  display: flex;
-  justify-content: space-around;
 }
 .phone > main > section > .account > .account__ad > ul > li > a {
   text-decoration: underline;
+  padding-left: 15px;
 }
 
 /* CONTENTS */
@@ -394,7 +398,128 @@ a {
 }
 
 .phone > main > .account__manager {
-  display: none;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+.phone > main > .account__manager > a{
+  position:absolute;
+  top: 0;
+  right: 13px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.phone > main > .account__manager > header {
+  text-align: left;
+  margin: 33px 252px 0 30px;
+  width: 93px;
+  height: 36px;
+}
+
+.phone > main > .account__manager > header > h2 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.phone > main > .account__manager > .option {
+  width: 375px;
+  height: 165px;
+  border: 1px solid blue;
+  box-sizing: border-box;
+}
+
+.phone > main > .account__manager > .option > div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 33px;
+  margin-left: 30px;
+  margin-right: 40px;
+  font-size: 18px;
+  font-weight: 500;
+  border: 1px solid blue;
+  box-sizing: border-box;
+}
+
+.phone > main > .account__manager > .option > div > h3 {
+  line-height: 27px;
+}
+
+
+
+.phone > main > .account__manager > .option > div > div > input {
+  width:100px;
+  height: 25px;
+  color: #FF5F00;
+  font-size: 24px;
+  font-weight: 500;
+  border: none;
+}
+.phone > main > .account__manager > .option > div > div > span {
+  color: #FF5F00;
+  font-size: 24px;
+  font-weight: 500;
+  vertical-align: bottom;
+}
+
+.phone > main > .account__manager > .option > .option__controller__box {
+  width: 308px;
+  height: 28px;
+  position: relative;
+  margin-bottom: 59px;
+  border: 1px solid blue;
+  box-sizing: border-box;
+}
+
+.phone > main > .account__manager > .option > .option__controller__box > .option__controller {
+  width: 308px;
+  height: 9px;
+  border-radius: 3px;
+  margin-top: 8px;
+  background-color: #c4c4c4;
+  position: relative;
+  overflow: hidden;
+}
+
+.phone > main > .account__manager > .option > .option__controller__box > .option__controller > .option__controller__ratio {
+  width: 70%;
+  height: 9px;
+  background-color: #FFDB4C;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.phone > main > .account__manager > .option > .option__controller__box > .option__controller__limit {
+  width: 8px;
+  height: 28px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  background-color: #FF5F00;
+  position: absolute;
+  top: -2px;
+  left: 70%;
+}
+
+.phone > main > .account__manager > .reports {
+  width: 375px;
+  height: 446px;
+  overflow: scroll;
+}
+
+.phone > main > .account__manager > .reports > .reports__chart {
+  width: 375px;
+  height: 200px;
+  border: 1px solid blue;
+  box-sizing: border-box;
+}
+.phone > main > .account__manager > .reports > .reports__graph {
+  width: 375px;
+  height: 200px;
+  border: 1px solid blue;
+  box-sizing: border-box;
 }
 
 /* NAV */

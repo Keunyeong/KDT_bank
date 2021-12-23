@@ -1,4 +1,9 @@
-const accountHistoryUrl = ["https://gyoheonlee.github.io/mobile-bank/data/bank-new.json","https://gyoheonlee.github.io/mobile-bank/data/bank-mother.json"];
+import _ from 'lodash';
+
+const today = new Date();
+const month = today.getMonth()+1;
+const date = today.getDate();
+let accountHistoryUrl = ["https://gyoheonlee.github.io/mobile-bank/data/bank-new.json","https://gyoheonlee.github.io/mobile-bank/data/bank-mother.json"];
 const phoneElem = document.querySelector(".phone");
 const accountElem = document.querySelector(".account");
 const sections = document.querySelectorAll('section');
@@ -10,6 +15,10 @@ const color=[['#f06292','#ba68c8','#5c6bc0','#4db6ac','#ffeb3b'],['#4dd0e1','#29
 sections.forEach((section,index)=>{
   const extensionBtn = section.children[1].children[0];
   const accountUrl = accountHistoryUrl[index];
+  const accountElem = section.children[0];
+  const accountMainElem = section.children[0].children[1];
+  const accountMainBoxElem = section.children[0].children[1].children[1];
+  const accountManageBtn = section.children[0].children[1].children[1].children[3];
   accountHistoryUpload(accountUrl, section, index);
   extensionBtn.addEventListener('touchstart', touch_start);
   section.addEventListener('touchend', touch_end);
@@ -24,7 +33,17 @@ sections.forEach((section,index)=>{
   section.children[2].children[4].children[0].addEventListener('click',(event)=>{
     addMoneyBox(event, section, index, accountUrl)
   });
+  accountManageBtn.addEventListener("click",()=>{
+    console.log("accountManagement");
+    openAccountManager(section)
+  });
 });
+
+function openAccountManager(section){
+  sections.forEach((sec)=>{
+    sec.style.display = "none";
+  });
+}
 
 function fundingMoneyBox(section, num){
   if(num === -1){
@@ -49,18 +68,15 @@ function pushMoneyBox(i, section){
   const targetAmount = section.children[1].children[1].children[0].children[i].children[3];
   const totalAmountElem = section.children[0].children[1].children[1].children[1].children[0].children[0];
   const totalAmount2Elem = section.children[0].children[1].children[1].children[1].children[0].children[1];
-  if(Number(fundAmount.children[0].innerText)>=Number(targetAmount.innerText)){
+  if(Number(fundAmount2.children[0].innerText)>=Number(targetAmount.innerText)){
     console.log("FULL")
   } else {
-    totalAmount2Elem.innerText -= 5000;
-    totalAmountElem.innerText = Number(totalAmount2Elem.innerText).toLocaleString('ko-KR');
+    printRemainingCost(section, 5000);
     let fundNum = Number(fundAmount2.children[0].innerText)+5000;
-    console.log(fundNum);
     fundAmount2.children[0].innerText = fundNum
     fundAmount.children[0].innerText = fundNum.toLocaleString('ko-KR');
     let ratioNum = Number(fundAmount2.children[0].innerText)/Number(targetAmount.innerText)*100;
     ratio.style.width = ratioNum+"%";
-    console.log(totalAmountElem.innerText);
   }
 }
 
@@ -167,6 +183,10 @@ function accountHistoryUpload(AccountUrl, section, index){
     }})
   .then(res=>{return res.json()})
   .then(function(data){
+    //LODASH TEST
+    const test = _.remove(data.bankList,{'date':'2021-11-03'});
+    data.bankList.reverse()
+
     // ACCOUNT
     const accountElem = section.children[0];
     // ACCOUNT__HEADER
@@ -218,11 +238,13 @@ function accountHistoryUpload(AccountUrl, section, index){
     })
     // HISTORY
     const historyElem = section.children[1].children[2].children[0];
-    data.bankList.reverse();
+    
+    let monthCost = 0;
     const dateArr = [];
-    for(let h=0; h < data.bankList.length; h++){
-      dateArr.push(data.bankList[h].date);
-    };
+    data.bankList.forEach((bank)=>{
+      dateArr.push(bank.date);
+    });
+    
     const set = new Set(dateArr);
     const newDateArr = [...set];
     let dateFindIndexArr = [];
@@ -268,11 +290,54 @@ function accountHistoryUpload(AccountUrl, section, index){
         ulEle.appendChild(hrEle);
       }
       todayCost = Math.abs(todayCost);
+      if(newDateArr[i].includes(month)){
+        monthCost+=Number(todayCost);
+      }
+      
       spanEle.textContent= todayCost.toLocaleString('ko-KR')+"원 지출";
       liEle.appendChild(spanEle);
       liEle.appendChild(ulEle);
       historyElem.appendChild(liEle);
     }
+    // ACCOUNTBAR
+    //month(현재month)에 해당하는 설정해놓은 지출가능 총액을 json에서 꺼내온다.
+    //현재month / 지출가능 총액 * 100
+    //const setAmount = _.find(data.setTotalAmount,{"month":month}).setAmount;
+    const setAmountNum = 10000000;
+    accountMainElem.children[1].children[2].children[2].textContent=setAmountNum;
+    const costAmount = Number(monthCost)/Number(setAmountNum)*100
+    accountMainElem.children[1].children[2].children[0].children[0].style.width = costAmount+'%';
+    accountMainElem.children[1].children[2].children[1].style.left = costAmount-1+'%';
+    const monthDate = [31,28,31,30,31,30,31,31,30,31,30,31];
+    const remainingDate = monthDate[month-1]-date;
+    accountMainElem.children[1].children[4].children[0].children[0].textContent=remainingDate;
+    const remainingCost = setAmountNum-monthCost;
+    accountMainElem.children[1].children[4].children[0].children[1].textContent=remainingCost.toLocaleString('ko-KR');
+    accountMainElem.children[1].children[4].children[0].children[2].textContent=remainingCost;
+    printRemainingCost(section,0);
     fundingMoneyBox(section, -1);
   })
+}
+
+function printRemainingCost(section, minusCost){
+  let remainingCost = section.children[0].children[1].children[1].children[4].children[0].children[2].textContent;
+  let totalAmount = section.children[0].children[1].children[1].children[1].children[0].children[1].textContent;
+  const setAmountNum = section.children[0].children[1].children[1].children[2].children[2].textContent;
+  let monthCost = Number(setAmountNum)-Number(remainingCost);
+  if(minusCost){
+    remainingCost = Number(remainingCost)-Number(minusCost);
+    totalAmount = Number(totalAmount)-Number(minusCost);
+  };
+  section.children[0].children[1].children[1].children[4].children[0].children[1].textContent=numberWithCommas(remainingCost);
+  section.children[0].children[1].children[1].children[4].children[0].children[2].textContent=remainingCost;
+  section.children[0].children[2].children[0].children[0].children[0].textContent=numberWithCommas(totalAmount);
+  section.children[0].children[1].children[1].children[1].children[0].children[0].textContent = numberWithCommas(totalAmount);
+  section.children[0].children[1].children[1].children[1].children[0].children[1].textContent = totalAmount;
+  const costAmount = Number(monthCost)/Number(setAmountNum)*100
+  section.children[0].children[1].children[1].children[2].children[0].children[0].style.width = costAmount+'%';
+  section.children[0].children[1].children[1].children[2].children[1].style.left = costAmount-1+'%';
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
