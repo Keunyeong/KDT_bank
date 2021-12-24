@@ -73,10 +73,6 @@ a {
   overflow: hidden;
   padding-top:0px;
 }
-/* 삭제해야함 */
-.phone > main > section {
-  z-index: 3;
-}
 
 .phone > main > section > .add__money__box {
   width : 230px;
@@ -395,12 +391,6 @@ a {
 .phone > main > section > .contents > .contents__history > .contents__history__list > li > ul > li {
   display:flex;
   justify-content: space-between;
-}
-
-.phone > main > .account__manager {
-  position:absolute;
-  top:0;
-  left:0;
 }
 
 .phone > main > .account__manager > a{

@@ -1,12 +1,14 @@
 import _ from 'lodash';
-
+import Chart from 'chart.js/auto';
 const today = new Date();
 const month = today.getMonth()+1;
 const date = today.getDate();
+const monthDate = [31,28,31,30,31,30,31,31,30,31,30,31];
 let accountHistoryUrl = ["https://gyoheonlee.github.io/mobile-bank/data/bank-new.json","https://gyoheonlee.github.io/mobile-bank/data/bank-mother.json"];
 const phoneElem = document.querySelector(".phone");
 const accountElem = document.querySelector(".account");
 const sections = document.querySelectorAll('section');
+const accountManageElems = document.querySelectorAll(".account__manager");
 let start_x, end_x; 
 let start_y, end_y;
 const slideWidth=['-375px',0,'375px'];
@@ -24,6 +26,8 @@ sections.forEach((section,index)=>{
   section.addEventListener('touchend', touch_end);
   section.children[0].addEventListener('touchstart',slide_start);
   section.children[0].addEventListener('touchend',(event)=>{ slide_end(event, index) });
+  accountManageElems[index].addEventListener('touchstart',slide_start);
+  accountManageElems[index].addEventListener('touchend',(event)=>{ slide_end(event, index) });
   section.children[1].children[1].children[0].lastElementChild.addEventListener('click',()=>{
     section.children[2].style.zIndex=5;
   });
@@ -34,15 +38,59 @@ sections.forEach((section,index)=>{
     addMoneyBox(event, section, index, accountUrl)
   });
   accountManageBtn.addEventListener("click",()=>{
-    console.log("accountManagement");
-    openAccountManager(section)
+    openAccountManager(0);
+  });
+
+  console.log(accountManageElems[index].children[3]);
+  accountManageElems[index].children[3].addEventListener('click',()=>{
+    openAccountManager(1);
   });
 });
 
-function openAccountManager(section){
-  sections.forEach((sec)=>{
-    sec.style.display = "none";
-  });
+function addChart(index,month,monthCostArray){
+  const ctx = accountManageElems[index].children[2].children[0].children[1].children[0];
+  const labels = [];
+  for(let i=2; i < monthDate[month-1]; i +=2){
+    if(i <= date){
+      labels.push(i);
+    }
+  }
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: month+'월 지출 내역',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: monthCostArray,
+    }]
+  };
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {}
+  };
+  const myChart = new Chart(
+    ctx,
+    config
+  );
+
+  return myChart
+}
+
+
+function openAccountManager(btn){
+  if(btn === 0 ){
+    sections.forEach((sec, index)=>{
+      sec.style.display = "none";
+      accountManageElems[index].style.display = "block";
+    });
+  } else if (1){
+    sections.forEach((sec, index)=>{
+      sec.style.display = "block";
+      accountManageElems[index].style.display = "none";
+    });
+  }
+  
 }
 
 function fundingMoneyBox(section, num){
@@ -140,6 +188,9 @@ function slideLeft(index){
   if(index<sections.length-1){
     sections[index].style.left = '-375px';
     sections[index+1].style.left = 0;
+    accountManageElems[index].style.left = '-375px';
+    accountManageElems[index+1].style.left = 0;
+    
   }
 }
 
@@ -147,6 +198,8 @@ function slideRight(index){
   if(0<index){
     sections[index-1].style.left = 0;
     sections[index].style.left = '+375px';
+    accountManageElems[index-1].style.left = 0;
+    accountManageElems[index].style.left = '+375px';
   }
 }
 
@@ -238,7 +291,7 @@ function accountHistoryUpload(AccountUrl, section, index){
     })
     // HISTORY
     const historyElem = section.children[1].children[2].children[0];
-    
+    const monthCostArray=[];
     let monthCost = 0;
     const dateArr = [];
     data.bankList.forEach((bank)=>{
@@ -290,10 +343,11 @@ function accountHistoryUpload(AccountUrl, section, index){
         ulEle.appendChild(hrEle);
       }
       todayCost = Math.abs(todayCost);
-      if(newDateArr[i].includes(month)){
+      const thisMonth = Number(newDateArr[i][5]+newDateArr[i][6]);
+      if(thisMonth === month){
         monthCost+=Number(todayCost);
-      }
-      
+        monthCostArray.push(Number(todayCost));
+      };
       spanEle.textContent= todayCost.toLocaleString('ko-KR')+"원 지출";
       liEle.appendChild(spanEle);
       liEle.appendChild(ulEle);
@@ -308,7 +362,6 @@ function accountHistoryUpload(AccountUrl, section, index){
     const costAmount = Number(monthCost)/Number(setAmountNum)*100
     accountMainElem.children[1].children[2].children[0].children[0].style.width = costAmount+'%';
     accountMainElem.children[1].children[2].children[1].style.left = costAmount-1+'%';
-    const monthDate = [31,28,31,30,31,30,31,31,30,31,30,31];
     const remainingDate = monthDate[month-1]-date;
     accountMainElem.children[1].children[4].children[0].children[0].textContent=remainingDate;
     const remainingCost = setAmountNum-monthCost;
@@ -316,6 +369,10 @@ function accountHistoryUpload(AccountUrl, section, index){
     accountMainElem.children[1].children[4].children[0].children[2].textContent=remainingCost;
     printRemainingCost(section,0);
     fundingMoneyBox(section, -1);
+
+    // 지출관리 페이지
+    // console.log(accountManageElems);
+    addChart(index,month, monthCostArray);
   })
 }
 
