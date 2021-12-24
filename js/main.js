@@ -4,7 +4,7 @@ const today = new Date();
 const month = today.getMonth()+1;
 const date = today.getDate();
 const monthDate = [31,28,31,30,31,30,31,31,30,31,30,31];
-let accountHistoryUrl = ["https://gyoheonlee.github.io/mobile-bank/data/bank-new.json","https://gyoheonlee.github.io/mobile-bank/data/bank-mother.json"];
+let accountHistoryUrl = ["https://gyoheonlee.github.io/mobile-bank/data/bank-me.json","https://gyoheonlee.github.io/mobile-bank/data/bank-mom.json","https://gyoheonlee.github.io/mobile-bank/data/bank-son.json"];
 const phoneElem = document.querySelector(".phone");
 const accountElem = document.querySelector(".account");
 const sections = document.querySelectorAll('section');
@@ -12,7 +12,7 @@ const accountManageElems = document.querySelectorAll(".account__manager");
 let start_x, end_x; 
 let start_y, end_y;
 const slideWidth=['-375px',0,'375px'];
-const color=[['#f06292','#ba68c8','#5c6bc0','#4db6ac','#ffeb3b'],['#4dd0e1','#2979ff', '#e040fb', '#ffa726', '#ff9e80']];
+const color=[['#f06292','#ba68c8','#5c6bc0','#4db6ac','#ff6d00','#ffeb3b','#8bc34a',],['#ff6d00','#4dd0e1','#2979ff', '#8bc34a', '#e040fb', '#ffa726', '#ff9e80'],['#4db6ac','#ff6d00','#ffeb3b','#8bc34a','#f06292','#ba68c8','#5c6bc0',]];
 
 sections.forEach((section,index)=>{
   const extensionBtn = section.children[1].children[0];
@@ -35,13 +35,24 @@ sections.forEach((section,index)=>{
     section.children[2].style.zIndex=-1;
   });
   section.children[2].children[4].children[0].addEventListener('click',(event)=>{
-    addMoneyBox(event, section, index, accountUrl)
+    addMoneyBox(event, index, accountUrl)
   });
   accountManageBtn.addEventListener("click",()=>{
     openAccountManager(0);
   });
 
-  console.log(accountManageElems[index].children[3]);
+  const amountInput = accountManageElems[index].children[1].children[0].children[1].children[0];
+  amountInput.addEventListener("keypress",(e)=>{
+    const monthCost = Number(sessionStorage.getItem('monthCost'+index));
+    if(e.target.value >= monthCost){
+      sections[index].children[0].children[1].children[1].children[2].children[2].textContent= e.target.value;
+      if(e.code === 'Enter'){
+        e.target.placeholder=numberWithCommas(e.target.value);
+        e.target.value=numberWithCommas(e.target.value);
+        printRemainingCost(0, index);
+      };
+    }
+  });
   accountManageElems[index].children[3].addEventListener('click',()=>{
     openAccountManager(1);
   });
@@ -52,15 +63,15 @@ function addChart(index,month,monthCostArray){
   const labels = [];
   for(let i=2; i < monthDate[month-1]; i +=2){
     if(i <= date){
-      labels.push(i);
+      labels.push(i+"일");
     }
   }
   const data = {
     labels: labels,
     datasets: [{
       label: month+'월 지출 내역',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: color[1],
+      borderColor: color[2],
       data: monthCostArray,
     }]
   };
@@ -77,49 +88,81 @@ function addChart(index,month,monthCostArray){
   return myChart
 }
 
+function addGraph(index,classifyArr,classifyNumArr){
+  const ctx = accountManageElems[index].children[2].children[1].children[1].children[0];
+  const labels = [];
+  for(let i=0; i < classifyArr.length; i +=2){
+    if(i <= date){
+      labels.push(classifyArr[i]);
+    }
+  }
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: month+'월 지출 내역',
+      backgroundColor: color[0],
+      borderColor: color[0],
+      data: classifyNumArr,
+    }]
+  };
+  const config = {
+    type: 'doughnut',
+    data: data,
+    options: {}
+  };
+  const myGraph = new Chart(
+    ctx,
+    config
+  );
+
+  return myGraph
+}
+
 
 function openAccountManager(btn){
   if(btn === 0 ){
     sections.forEach((sec, index)=>{
       sec.style.display = "none";
       accountManageElems[index].style.display = "block";
+      phoneElem.style.backgroundColor="#fff"
     });
   } else if (1){
     sections.forEach((sec, index)=>{
       sec.style.display = "block";
       accountManageElems[index].style.display = "none";
+      phoneElem.style.backgroundColor="#EEECE5"
     });
   }
   
 }
 
-function fundingMoneyBox(section, num){
+function fundingMoneyBox(num, index){
   if(num === -1){
-    for(let i=0; i<section.children[1].children[1].children[0].children.length-1; i++){
-      section.children[1].children[1].children[0].children[i].addEventListener('click',(event)=>{
-        pushMoneyBox(i, section);
+    for(let i=0; i<sections[index].children[1].children[1].children[0].children.length-1; i++){
+      sections[index].children[1].children[1].children[0].children[i].addEventListener('click',(event)=>{
+        pushMoneyBox(i, index);
       })
     };
   } else {
-    for(let i=num; i<section.children[1].children[1].children[0].children.length-1; i++){
-      section.children[1].children[1].children[0].children[i].addEventListener('click',(event)=>{
-        pushMoneyBox(i, section);
+    for(let i=num; i<sections[index].children[1].children[1].children[0].children.length-1; i++){
+      sections[index].children[1].children[1].children[0].children[i].addEventListener('click',(event)=>{
+        pushMoneyBox(i, index);
       })
     };
   }
 }
 
-function pushMoneyBox(i, section){
-  const ratio = section.children[1].children[1].children[0].children[i].children[0];
-  const fundAmount = section.children[1].children[1].children[0].children[i].children[2];
-  const fundAmount2 = section.children[1].children[1].children[0].children[i].children[4];
-  const targetAmount = section.children[1].children[1].children[0].children[i].children[3];
-  const totalAmountElem = section.children[0].children[1].children[1].children[1].children[0].children[0];
-  const totalAmount2Elem = section.children[0].children[1].children[1].children[1].children[0].children[1];
+function pushMoneyBox(i, index){
+  const ratio = sections[index].children[1].children[1].children[0].children[i].children[0];
+  const fundAmount = sections[index].children[1].children[1].children[0].children[i].children[2];
+  const fundAmount2 = sections[index].children[1].children[1].children[0].children[i].children[4];
+  const targetAmount = sections[index].children[1].children[1].children[0].children[i].children[3];
+  const totalAmountElem = sections[index].children[0].children[1].children[1].children[1].children[0].children[0];
+  const totalAmount2Elem = sections[index].children[0].children[1].children[1].children[1].children[0].children[1];
   if(Number(fundAmount2.children[0].innerText)>=Number(targetAmount.innerText)){
     console.log("FULL")
   } else {
-    printRemainingCost(section, 5000);
+    printRemainingCost(5000, index);
     let fundNum = Number(fundAmount2.children[0].innerText)+5000;
     fundAmount2.children[0].innerText = fundNum
     fundAmount.children[0].innerText = fundNum.toLocaleString('ko-KR');
@@ -128,20 +171,19 @@ function pushMoneyBox(i, section){
   }
 }
 
-function addMoneyBox(event, section, index){
-  const moneyBoxLength = section.children[1].children[1].children[0].children.length;
+function addMoneyBox(event, index){
+  const moneyBoxLength = sections[index].children[1].children[1].children[0].children.length;
   const num = Number(moneyBoxLength)-1;
-  const titleElem = section.children[2].children[1];
-  const targetAmountElem = section.children[2].children[3];
+  const titleElem = sections[index].children[2].children[1];
+  const targetAmountElem = sections[index].children[2].children[3];
   if(titleElem.value === '' || targetAmountElem.value === ''){
     console.log('failed');
     titleElem.value = '';
     targetAmountElem.value = '';
-    section.children[2].style.zIndex=-1;
+    sections[index].children[2].style.zIndex=-1;
   } else {
     const title = titleElem.value;
     const targetAmount = targetAmountElem.value;
-    console.log(title, targetAmount);
     const MBLiDivElem = document.createElement('div');
     const MBLiRatioElem = document.createElement('div');
     const MBLiTitleElem = document.createElement('p');
@@ -163,12 +205,12 @@ function addMoneyBox(event, section, index){
     MBLiDivElem.appendChild(MBLiFundElem);
     MBLiDivElem.appendChild(MBLiTargetElem);
     MBLiDivElem.appendChild(MBLiFund2Elem);
-    section.children[1].children[1].children[0].lastElementChild.before(MBLiDivElem);
+    sections[index].children[1].children[1].children[0].lastElementChild.before(MBLiDivElem);
     titleElem.value = '';
     targetAmountElem.value = '';
-    section.children[2].style.zIndex=-1;
+    sections[index].children[2].style.zIndex=-1;
   }
-  fundingMoneyBox(section, num);
+  fundingMoneyBox(num, index);
 }
 
 function slide_start(e){
@@ -185,19 +227,36 @@ function slide_end(event, index){
 }
 
 function slideLeft(index){
-  if(index<sections.length-1){
+  if(index===0){
     sections[index].style.left = '-375px';
     sections[index+1].style.left = 0;
+    sections[index+2].style.left = '375px';
     accountManageElems[index].style.left = '-375px';
     accountManageElems[index+1].style.left = 0;
-    
+    accountManageElems[index+2].style.left = '375px';
+  } else if(index===1){
+    sections[index-1].style.left = '-750px';
+    sections[index].style.left = '-375px';
+    sections[index+1].style.left = 0;
+    accountManageElems[index-1].style.left = '-750px';
+    accountManageElems[index].style.left = '-375px';
+    accountManageElems[index+1].style.left = 0;
   }
 }
 
 function slideRight(index){
-  if(0<index){
+  if(index===1){
+    sections[index+1].style.left = '+750px';
+    sections[index-1].style.left = 0;
+    sections[index].style.left = '375px';
+    accountManageElems[index+1].style.left = '750px';
+    accountManageElems[index-1].style.left = 0;
+    accountManageElems[index].style.left = '375px';
+  } else if(index===2){
+    sections[index-2].style.left = '-375px';
     sections[index-1].style.left = 0;
     sections[index].style.left = '+375px';
+    accountManageElems[index-2].style.left = '-375px';
     accountManageElems[index-1].style.left = 0;
     accountManageElems[index].style.left = '+375px';
   }
@@ -247,7 +306,7 @@ function accountHistoryUpload(AccountUrl, section, index){
     const accountAdElem = accountElem.children[2];
     const avatarElem = accountHeaderElem.children[0];
     const h2Elem = accountHeaderElem.children[1];
-    const avatarImage = "https://firebasestorage.googleapis.com/v0/b/bankapp-3e013.appspot.com/o/avatar.png?alt=media&token=f929ad96-af1e-47bf-adfd-016135d338a6";
+    const avatarImage = data.accountImg;
     const avatarImageElem = avatarElem.children[0];
     h2Elem.textContent = data.accountId;
     avatarImageElem.src = avatarImage;
@@ -294,11 +353,63 @@ function accountHistoryUpload(AccountUrl, section, index){
     const monthCostArray=[];
     let monthCost = 0;
     const dateArr = [];
+    const classifyBaseArr = [];
     data.bankList.forEach((bank)=>{
       dateArr.push(bank.date);
+      switch (bank.classify){
+        case 'oiling' :
+          bank.classify="주유비";
+          break;
+        case 'eatout' :
+          bank.classify="외식";
+          break;
+        case 'food' :
+          bank.classify="식비";
+          break;
+        case 'mart' :
+          bank.classify="마트";
+          break;
+        case 'shopping' :
+          bank.classify="쇼핑";
+          break;
+        case 'health' :
+          bank.classify="건강";
+          break;
+        default :
+          bank.classify="기타";
+      }
+      classifyBaseArr.push(bank.classify);
     });
-    
     const set = new Set(dateArr);
+    const setClassify = new Set(classifyBaseArr);
+    const classifyArr = [...setClassify];
+    const classifyNumArr = [];
+    const classifyCost = [];
+    classifyArr.forEach((item)=>{
+      let num = 0;
+      let cost = 0;
+      const classifySame = _.filter(data.bankList, {classify:item});
+      classifySame.forEach((obj)=>{
+        const thisMonth = Number(obj.date[5]+obj.date[6]);
+        if(thisMonth===month){
+          cost += obj.price;
+          num++;
+        }
+      })
+      classifyCost.push(cost);
+      classifyNumArr.push(num);
+    });
+    classifyArr.forEach((item, i)=>{
+      const classLiElem= document.createElement('li');
+      const classSpanElem= document.createElement('span');
+      const priceSpanElem= document.createElement('span');
+      classSpanElem.textContent=item;
+      priceSpanElem.textContent=classifyCost[i];
+      classLiElem.appendChild(classSpanElem);
+      classLiElem.appendChild(priceSpanElem);
+      accountManageElems[index].children[2].children[1].children[2].children[0].appendChild(classLiElem);
+    });
+
     const newDateArr = [...set];
     let dateFindIndexArr = [];
     for(let k=0; k<newDateArr.length; k++){
@@ -356,43 +467,54 @@ function accountHistoryUpload(AccountUrl, section, index){
     // ACCOUNTBAR
     //month(현재month)에 해당하는 설정해놓은 지출가능 총액을 json에서 꺼내온다.
     //현재month / 지출가능 총액 * 100
-    //const setAmount = _.find(data.setTotalAmount,{"month":month}).setAmount;
-    const setAmountNum = 10000000;
-    accountMainElem.children[1].children[2].children[2].textContent=setAmountNum;
+    const setAmount = data.setAmountNum;
+    const setAmountNum = setAmount+4000000;
+    setAmountPrint(index, setAmountNum);
     const costAmount = Number(monthCost)/Number(setAmountNum)*100
+    sessionStorage.setItem('monthCost'+index, monthCost);
     accountMainElem.children[1].children[2].children[0].children[0].style.width = costAmount+'%';
     accountMainElem.children[1].children[2].children[1].style.left = costAmount-1+'%';
+    accountManageElems[index].children[1].children[1].children[1].style.left = costAmount-1+'%';
+    accountManageElems[index].children[1].children[1].children[0].children[0].style.width = costAmount+'%';
     const remainingDate = monthDate[month-1]-date;
     accountMainElem.children[1].children[4].children[0].children[0].textContent=remainingDate;
     const remainingCost = setAmountNum-monthCost;
     accountMainElem.children[1].children[4].children[0].children[1].textContent=remainingCost.toLocaleString('ko-KR');
     accountMainElem.children[1].children[4].children[0].children[2].textContent=remainingCost;
-    printRemainingCost(section,0);
-    fundingMoneyBox(section, -1);
+    printRemainingCost(0,index);
+    fundingMoneyBox(-1, index);
 
     // 지출관리 페이지
-    // console.log(accountManageElems);
     addChart(index,month, monthCostArray);
+    addGraph(index,classifyArr,classifyNumArr);
   })
 }
+function setAmountPrint(index, setAmountNum){
+  sections[index].children[0].children[1].children[1].children[2].children[2].textContent=setAmountNum;
+  accountManageElems[index].children[1].children[0].children[1].children[0].placeholder=numberWithCommas(setAmountNum);
+}
 
-function printRemainingCost(section, minusCost){
-  let remainingCost = section.children[0].children[1].children[1].children[4].children[0].children[2].textContent;
-  let totalAmount = section.children[0].children[1].children[1].children[1].children[0].children[1].textContent;
-  const setAmountNum = section.children[0].children[1].children[1].children[2].children[2].textContent;
-  let monthCost = Number(setAmountNum)-Number(remainingCost);
+function printRemainingCost(minusCost, index){
+  let remainingCost = sections[index].children[0].children[1].children[1].children[4].children[0].children[2].textContent;
+  let totalAmount = sections[index].children[0].children[1].children[1].children[1].children[0].children[1].textContent;
+  const setAmountNum = sections[index].children[0].children[1].children[1].children[2].children[2].textContent;
+  let monthCost = Number(sessionStorage.getItem('monthCost'+index));
   if(minusCost){
     remainingCost = Number(remainingCost)-Number(minusCost);
     totalAmount = Number(totalAmount)-Number(minusCost);
+    monthCost = Number(monthCost)+Number(minusCost);
+    sessionStorage.setItem('monthCost'+index, monthCost);
   };
-  section.children[0].children[1].children[1].children[4].children[0].children[1].textContent=numberWithCommas(remainingCost);
-  section.children[0].children[1].children[1].children[4].children[0].children[2].textContent=remainingCost;
-  section.children[0].children[2].children[0].children[0].children[0].textContent=numberWithCommas(totalAmount);
-  section.children[0].children[1].children[1].children[1].children[0].children[0].textContent = numberWithCommas(totalAmount);
-  section.children[0].children[1].children[1].children[1].children[0].children[1].textContent = totalAmount;
+  sections[index].children[0].children[1].children[1].children[4].children[0].children[1].textContent=numberWithCommas(remainingCost);
+  sections[index].children[0].children[1].children[1].children[4].children[0].children[2].textContent=remainingCost;
+  sections[index].children[0].children[2].children[0].children[0].children[0].textContent=numberWithCommas(totalAmount);
+  sections[index].children[0].children[1].children[1].children[1].children[0].children[0].textContent = numberWithCommas(totalAmount);
+  sections[index].children[0].children[1].children[1].children[1].children[0].children[1].textContent = totalAmount;
   const costAmount = Number(monthCost)/Number(setAmountNum)*100
-  section.children[0].children[1].children[1].children[2].children[0].children[0].style.width = costAmount+'%';
-  section.children[0].children[1].children[1].children[2].children[1].style.left = costAmount-1+'%';
+  sections[index].children[0].children[1].children[1].children[2].children[0].children[0].style.width = costAmount+'%';
+  sections[index].children[0].children[1].children[1].children[2].children[1].style.left = costAmount-1+'%';
+  accountManageElems[index].children[1].children[1].children[1].style.left = costAmount-1+'%';
+  accountManageElems[index].children[1].children[1].children[0].children[0].style.width = costAmount+'%';
 }
 
 function numberWithCommas(x) {

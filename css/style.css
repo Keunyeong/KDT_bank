@@ -113,6 +113,12 @@ a {
   transition: 1s;
 }
 
+.phone > main > .sec03 {
+  position: absolute;
+  left: 750px;
+  transition: 1s;
+}
+
 .phone > main > section > .account {
   height: 297px;
 }
@@ -393,6 +399,10 @@ a {
   justify-content: space-between;
 }
 
+.phone > main > .account__manager {
+  display: none;
+}
+
 .phone > main > .account__manager > a{
   position:absolute;
   top: 0;
@@ -416,9 +426,7 @@ a {
 
 .phone > main > .account__manager > .option {
   width: 375px;
-  height: 165px;
-  border: 1px solid blue;
-  box-sizing: border-box;
+  height: 135px;
 }
 
 .phone > main > .account__manager > .option > div {
@@ -429,8 +437,7 @@ a {
   margin-right: 40px;
   font-size: 18px;
   font-weight: 500;
-  border: 1px solid blue;
-  box-sizing: border-box;
+  background-color: #fff;
 }
 
 .phone > main > .account__manager > .option > div > h3 {
@@ -440,12 +447,13 @@ a {
 
 
 .phone > main > .account__manager > .option > div > div > input {
-  width:100px;
+  width:150px;
   height: 25px;
   color: #FF5F00;
   font-size: 24px;
   font-weight: 500;
   border: none;
+  text-align: right;
 }
 .phone > main > .account__manager > .option > div > div > span {
   color: #FF5F00;
@@ -459,8 +467,6 @@ a {
   height: 28px;
   position: relative;
   margin-bottom: 59px;
-  border: 1px solid blue;
-  box-sizing: border-box;
 }
 
 .phone > main > .account__manager > .option > .option__controller__box > .option__controller {
@@ -502,14 +508,51 @@ a {
 .phone > main > .account__manager > .reports > .reports__chart {
   width: 375px;
   height: 200px;
-  border: 1px solid blue;
-  box-sizing: border-box;
+  padding-top: 2px;
+}
+
+.phone > main > .account__manager > .reports > .reports__chart > .chart {
+  overflow: hidden;
+}
+
+.phone > main > .account__manager > .reports > .reports__chart > div {
+  font-size: 18px;
+  font-weight: 500;
+  padding-left: 30px;
 }
 .phone > main > .account__manager > .reports > .reports__graph {
   width: 375px;
-  height: 200px;
-  border: 1px solid blue;
-  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.phone > main > .account__manager > .reports > .reports__graph > div {
+  font-size: 18px;
+  font-weight: 500;
+  padding-left: 30px;
+  margin-top: 40px;
+}
+.phone > main > .account__manager > .reports > .reports__graph > .graph {
+  width: 308px;
+  height: 308px;
+}
+
+.phone > main > .account__manager > .reports > .reports__graph > .reports__contents {
+  width: 308px;
+}
+
+.phone > main > .account__manager > .reports > .reports__graph > .reports__contents > ul > li{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.phone > main > .account__manager > .reports > .reports__graph > .reports__contents > ul > li > span:first-child{
+  margin-left: 30px;
+}
+
+.phone > main > .account__manager > .reports > .reports__graph > .reports__contents > ul > li > span:last-child{
+  color: #B4B4B4;
+  margin-right: 30px;
 }
 
 /* NAV */
