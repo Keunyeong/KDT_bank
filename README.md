@@ -1,5 +1,11 @@
 # KDT_bank
 
+## 최종
+![KDT_final01](https://user-images.githubusercontent.com/79135142/147340751-6c9bf4de-e1e6-400e-a6d4-1bf588822d13.gif)
+
+![KDT_final02](https://user-images.githubusercontent.com/79135142/147340758-e0213a00-f05d-4de3-bc08-cb7e12e3f4e4.gif)
+
+
 ### 로드맵 및 작업지침
 
 - Step1. 마크업
