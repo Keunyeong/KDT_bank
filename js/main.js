@@ -25,12 +25,9 @@ const color = [
 sections.forEach((section, index) => {
   const extensionBtn = section.children[1].children[0];
   const accountUrl = accountHistoryUrl[index];
-  const accountElem = section.children[0];
-  const accountMainElem = section.children[0].children[1];
-  const accountMainBoxElem = section.children[0].children[1].children[1];
   const accountManageBtn =
     section.children[0].children[1].children[1].children[3];
-  accountHistoryUpload(accountUrl, section, index);
+  accountHistoryUpload(accountUrl, index);
   extensionBtn.addEventListener("touchstart", touch_start);
   section.addEventListener("touchend", touch_end);
   section.children[0].addEventListener("touchstart", slide_start);
@@ -341,7 +338,39 @@ function contentsContraction(contents) {
   }
 }
 
-function accountHistoryUpload(AccountUrl, section, index) {
+function createMoneyBox(data, index) {
+  const contentsMoneyboxAddBtn =
+    sections[index].children[1].children[1].children[0].lastElementChild;
+  data.moneyBox.forEach((obj, num) => {
+    const MBLiDivElem = document.createElement("div");
+    const MBLiRatioElem = document.createElement("div");
+    const MBLiTitleElem = document.createElement("p");
+    const MBLiFundElem = document.createElement("p");
+    const MBLiTargetElem = document.createElement("p");
+    const MBLiFund2Elem = document.createElement("p");
+    const fundAmount =
+      (Number(obj.fundAmount) / Number(obj.targetAmount)) * 100;
+    MBLiTargetElem.innerText = obj.targetAmount;
+    MBLiTargetElem.style.display = "none";
+    MBLiFund2Elem.innerHTML = `<span>${obj.fundAmount}</span>원`;
+    MBLiFund2Elem.style.display = "none";
+    MBLiRatioElem.classList.add("money-box__ratio");
+    MBLiTitleElem.textContent = obj.title;
+    MBLiRatioElem.style.width = fundAmount + "%";
+    MBLiRatioElem.style.backgroundColor = color[index][num];
+    MBLiFundElem.innerHTML = `<span>${obj.fundAmount.toLocaleString(
+      "ko-KR"
+    )}</span>원`;
+    MBLiDivElem.appendChild(MBLiRatioElem);
+    MBLiDivElem.appendChild(MBLiTitleElem);
+    MBLiDivElem.appendChild(MBLiFundElem);
+    MBLiDivElem.appendChild(MBLiTargetElem);
+    MBLiDivElem.appendChild(MBLiFund2Elem);
+    contentsMoneyboxAddBtn.before(MBLiDivElem);
+  });
+}
+
+function accountHistoryUpload(AccountUrl, index) {
   fetch(AccountUrl, {
     headers: {
       Accept: "application / json",
@@ -356,7 +385,7 @@ function accountHistoryUpload(AccountUrl, section, index) {
       data.bankList.reverse();
 
       // ACCOUNT
-      const accountElem = section.children[0];
+      const accountElem = sections[index].children[0];
       // ACCOUNT__HEADER
       const accountHeaderElem = accountElem.children[0];
       const accountAdElem = accountElem.children[2];
@@ -380,42 +409,9 @@ function accountHistoryUpload(AccountUrl, section, index) {
         "ko-KR"
       );
       //CONTENTS
-      const contentsElem = section.children[1];
-      const contentsMoneyboxElem = section.children[1].children[1];
-      const contentsMoneyboxListElem =
-        section.children[1].children[1].children[0];
-      const contentsMoneyboxAddBtn =
-        section.children[1].children[1].children[0].lastElementChild;
-
-      data.moneyBox.forEach((obj, num) => {
-        const MBLiDivElem = document.createElement("div");
-        const MBLiRatioElem = document.createElement("div");
-        const MBLiTitleElem = document.createElement("p");
-        const MBLiFundElem = document.createElement("p");
-        const MBLiTargetElem = document.createElement("p");
-        const MBLiFund2Elem = document.createElement("p");
-        const fundAmount =
-          (Number(obj.fundAmount) / Number(obj.targetAmount)) * 100;
-        MBLiTargetElem.innerText = obj.targetAmount;
-        MBLiTargetElem.style.display = "none";
-        MBLiFund2Elem.innerHTML = `<span>${obj.fundAmount}</span>원`;
-        MBLiFund2Elem.style.display = "none";
-        MBLiRatioElem.classList.add("money-box__ratio");
-        MBLiTitleElem.textContent = obj.title;
-        MBLiRatioElem.style.width = fundAmount + "%";
-        MBLiRatioElem.style.backgroundColor = color[index][num];
-        MBLiFundElem.innerHTML = `<span>${obj.fundAmount.toLocaleString(
-          "ko-KR"
-        )}</span>원`;
-        MBLiDivElem.appendChild(MBLiRatioElem);
-        MBLiDivElem.appendChild(MBLiTitleElem);
-        MBLiDivElem.appendChild(MBLiFundElem);
-        MBLiDivElem.appendChild(MBLiTargetElem);
-        MBLiDivElem.appendChild(MBLiFund2Elem);
-        contentsMoneyboxAddBtn.before(MBLiDivElem);
-      });
+      createMoneyBox(data, index);
       // HISTORY
-      const historyElem = section.children[1].children[2].children[0];
+      const historyElem = sections[index].children[1].children[2].children[0];
       const monthCostArray = [];
       let monthCost = 0;
       const dateArr = [];
