@@ -484,7 +484,6 @@ function accountHistoryUpload(AccountUrl, index) {
         );
       }
       dateFindIndexArr.push(data.bankList.length);
-
       for (let i = 0; i < newDateArr.length; i++) {
         const todayCost = 0;
         const liEle = document.createElement("li");
@@ -496,7 +495,7 @@ function accountHistoryUpload(AccountUrl, index) {
         } else if (i === 1) {
           pEle.textContent = "어제";
         } else {
-          pEle.textContent = newDateArr[i] + "일";
+          pEle.textContent = date + "일";
         }
         liEle.appendChild(pEle);
 
@@ -524,7 +523,7 @@ function accountHistoryUpload(AccountUrl, index) {
           ulEle.appendChild(hrEle);
         }
         todayCost = Math.abs(todayCost);
-        const thisMonth = Number(newDateArr[i][5] + newDateArr[i][6]);
+        const thisMonth = Number(date[5] + date[6]);
         if (thisMonth === month) {
           monthCost += Number(todayCost);
           monthCostArray.push(Number(todayCost));
@@ -537,37 +536,52 @@ function accountHistoryUpload(AccountUrl, index) {
       // ACCOUNTBAR
       //month(현재month)에 해당하는 설정해놓은 지출가능 총액을 json에서 꺼내온다.
       //현재month / 지출가능 총액 * 100
-      const setAmount = data.setAmountNum;
-      const setAmountNum = setAmount + 4000000;
-      setAmountPrint(index, setAmountNum);
-      const costAmount = (Number(monthCost) / Number(setAmountNum)) * 100;
-      sessionStorage.setItem("monthCost" + index, monthCost);
-      accountMainElem.children[1].children[2].children[0].children[0].style.width =
-        costAmount + "%";
-      accountMainElem.children[1].children[2].children[1].style.left =
-        costAmount - 1 + "%";
-      accountManageElems[index].children[1].children[1].children[1].style.left =
-        costAmount - 1 + "%";
-      accountManageElems[
-        index
-      ].children[1].children[1].children[0].children[0].style.width =
-        costAmount + "%";
-      const remainingDate = monthDate[month - 1] - date;
-      accountMainElem.children[1].children[4].children[0].children[0].textContent =
-        remainingDate;
-      const remainingCost = setAmountNum - monthCost;
-      accountMainElem.children[1].children[4].children[0].children[1].textContent =
-        remainingCost.toLocaleString("ko-KR");
-      accountMainElem.children[1].children[4].children[0].children[2].textContent =
-        remainingCost;
-      printRemainingCost(0, index);
-      fundingMoneyBox(-1, index);
+      printAccountBar(data, index, monthCost);
 
       // 지출관리 페이지
       addChart(index, month, monthCostArray);
       addGraph(index, classifyArr, classifyNumArr);
     });
 }
+
+function printAccountBar(data, index, monthCost) {
+  const setAmount = data.setAmountNum;
+  const setAmountNum = setAmount + 4000000;
+  setAmountPrint(index, setAmountNum);
+  const costAmount = (Number(monthCost) / Number(setAmountNum)) * 100;
+  sessionStorage.setItem("monthCost" + index, monthCost);
+  sections[
+    index
+  ].children[0].children[1].children[1].children[2].children[0].children[0].style.width =
+    costAmount + "%";
+  sections[
+    index
+  ].children[0].children[1].children[1].children[2].children[1].style.left =
+    costAmount - 1 + "%";
+  accountManageElems[index].children[1].children[1].children[1].style.left =
+    costAmount - 1 + "%";
+  accountManageElems[
+    index
+  ].children[1].children[1].children[0].children[0].style.width =
+    costAmount + "%";
+  const remainingDate = monthDate[month - 1] - date;
+  sections[
+    index
+  ].children[0].children[1].children[1].children[4].children[0].children[0].textContent =
+    remainingDate;
+  const remainingCost = setAmountNum - monthCost;
+  sections[
+    index
+  ].children[0].children[1].children[1].children[4].children[0].children[1].textContent =
+    remainingCost.toLocaleString("ko-KR");
+  sections[
+    index
+  ].children[0].children[1].children[1].children[4].children[0].children[2].textContent =
+    remainingCost;
+  printRemainingCost(0, index);
+  fundingMoneyBox(-1, index);
+}
+
 function setAmountPrint(index, setAmountNum) {
   sections[
     index
