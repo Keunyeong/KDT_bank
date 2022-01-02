@@ -380,10 +380,7 @@ function accountHistoryUpload(AccountUrl, index) {
       return res.json();
     })
     .then(function (data) {
-      //LODASH TEST
-      const test = _.remove(data.bankList, { date: "2021-11-03" });
       data.bankList.reverse();
-
       // ACCOUNT
       const accountElem = sections[index].children[0];
       // ACCOUNT__HEADER
@@ -443,39 +440,15 @@ function accountHistoryUpload(AccountUrl, index) {
         classifyBaseArr.push(bank.classify);
       });
       const set = new Set(dateArr);
+      // 분류 중복 제거(set 배열)
       const setClassify = new Set(classifyBaseArr);
+      // 분류 중복 제거 배열
       const classifyArr = [...setClassify];
+      // 분류별 지출횟수
       const classifyNumArr = [];
+      // 분류별 지출액
       const classifyCost = [];
-      classifyArr.forEach((item) => {
-        let num = 0;
-        let cost = 0;
-        const classifySame = _.filter(data.bankList, { classify: item });
-        classifySame.forEach((obj) => {
-          const thisMonth = Number(obj.date[5] + obj.date[6]);
-          if (thisMonth === month) {
-            cost += obj.price;
-            num++;
-          }
-        });
-        classifyCost.push(cost);
-        classifyNumArr.push(num);
-      });
-      classifyArr.forEach((item, i) => {
-        const classLiElem = document.createElement("li");
-        const classSpanElem = document.createElement("span");
-        const priceSpanElem = document.createElement("span");
-        classSpanElem.textContent = item;
-        priceSpanElem.textContent = classifyCost[i];
-        classLiElem.appendChild(classSpanElem);
-        classLiElem.appendChild(priceSpanElem);
-        accountManageElems[
-          index
-        ].children[2].children[1].children[2].children[0].appendChild(
-          classLiElem
-        );
-      });
-
+      createClassify(data, classifyArr, classifyNumArr, classifyCost, index);
       const newDateArr = [...set];
       let dateFindIndexArr = [];
       for (let k = 0; k < newDateArr.length; k++) {
@@ -542,6 +515,41 @@ function accountHistoryUpload(AccountUrl, index) {
       addChart(index, month, monthCostArray);
       addGraph(index, classifyArr, classifyNumArr);
     });
+}
+
+function createClassify(
+  data,
+  classifyArr,
+  classifyNumArr,
+  classifyCost,
+  index
+) {
+  classifyArr.forEach((item) => {
+    let num = 0;
+    let cost = 0;
+    const classifySame = _.filter(data.bankList, { classify: item });
+    classifySame.forEach((obj) => {
+      const thisMonth = Number(obj.date[5] + obj.date[6]);
+      if (thisMonth === month) {
+        cost += obj.price;
+        num++;
+      }
+    });
+    classifyCost.push(cost);
+    classifyNumArr.push(num);
+  });
+  classifyArr.forEach((item, i) => {
+    const classLiElem = document.createElement("li");
+    const classSpanElem = document.createElement("span");
+    const priceSpanElem = document.createElement("span");
+    classSpanElem.textContent = item;
+    priceSpanElem.textContent = classifyCost[i];
+    classLiElem.appendChild(classSpanElem);
+    classLiElem.appendChild(priceSpanElem);
+    accountManageElems[
+      index
+    ].children[2].children[1].children[2].children[0].appendChild(classLiElem);
+  });
 }
 
 function printAccountBar(data, index, monthCost) {
