@@ -1,8 +1,8 @@
 import _ from "lodash";
 import Chart from "chart.js/auto";
 const today = new Date();
-const month = today.getMonth() + 1;
-const date = today.getDate();
+const month = 12;
+const date = 30;
 const monthDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 let accountHistoryUrl = [
   "https://gyoheonlee.github.io/mobile-bank/data/bank-me.json",
@@ -131,7 +131,17 @@ function addGraph(index, classifyArr, classifyNumArr) {
   const config = {
     type: "doughnut",
     data: data,
-    options: {},
+    options: {
+      responsive: false,
+      width: 300,
+      borderWidth: 0,
+      cutout: 100,
+      plugins: {
+        legend: {
+          position: "none",
+        },
+      },
+    },
   };
   const myGraph = new Chart(ctx, config);
 
