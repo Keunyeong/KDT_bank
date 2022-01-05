@@ -15,7 +15,6 @@ const sections = document.querySelectorAll("section");
 const accountManageElems = document.querySelectorAll(".account__manager");
 let start_x, end_x;
 let start_y, end_y;
-const slideWidth = ["-375px", 0, "375px"];
 const color = [
   ["#f06292", "#ba68c8", "#5c6bc0", "#4db6ac", "#ff6d00", "#ffeb3b", "#8bc34a"],
   ["#ff6d00", "#4dd0e1", "#2979ff", "#8bc34a", "#e040fb", "#ffa726", "#ff9e80"],
@@ -187,7 +186,7 @@ function fundingMoneyBox(num, index) {
     ) {
       sections[index].children[1].children[1].children[0].children[
         i
-      ].addEventListener("click", (event) => {
+      ].addEventListener("click", () => {
         pushMoneyBox(i, index);
       });
     }
@@ -467,55 +466,7 @@ function accountHistoryUpload(AccountUrl, index) {
         );
       }
       dateFindIndexArr.push(data.bankList.length);
-      for (let i = 0; i < newDateArr.length; i++) {
-        const todayCost = 0;
-        const liEle = document.createElement("li");
-        const pEle = document.createElement("p");
-        const ulEle = document.createElement("ul");
-        const spanEle = document.createElement("span");
-        if (i === 0) {
-          pEle.textContent = "오늘";
-        } else if (i === 1) {
-          pEle.textContent = "어제";
-        } else {
-          pEle.textContent = date + "일";
-        }
-        liEle.appendChild(pEle);
-
-        for (let j = dateFindIndexArr[i]; j < dateFindIndexArr[i + 1]; j++) {
-          const li2Ele = document.createElement("li");
-          const pEle = document.createElement("p");
-          const span1Ele = document.createElement("span");
-          const span2Ele = document.createElement("span");
-          const hrEle = document.createElement("hr");
-
-          span1Ele.textContent = data.bankList[j].history;
-
-          if (data.bankList[j].income === "in") {
-            span2Ele.style.color = "red";
-            span2Ele.textContent =
-              "+" + data.bankList[j].price.toLocaleString("ko-KR");
-          } else {
-            span2Ele.textContent =
-              "-" + data.bankList[j].price.toLocaleString("ko-KR");
-            todayCost -= Number(data.bankList[j].price);
-          }
-          li2Ele.appendChild(span1Ele);
-          li2Ele.appendChild(span2Ele);
-          ulEle.appendChild(li2Ele);
-          ulEle.appendChild(hrEle);
-        }
-        todayCost = Math.abs(todayCost);
-        const thisMonth = Number(date[5] + date[6]);
-        if (thisMonth === month) {
-          monthCost += Number(todayCost);
-          monthCostArray.push(Number(todayCost));
-        }
-        spanEle.textContent = todayCost.toLocaleString("ko-KR") + "원 지출";
-        liEle.appendChild(spanEle);
-        liEle.appendChild(ulEle);
-        historyElem.appendChild(liEle);
-      }
+      createStory(data, newDateArr, historyElem, dateFindIndexArr);
       // ACCOUNTBAR
       //month(현재month)에 해당하는 설정해놓은 지출가능 총액을 json에서 꺼내온다.
       //현재month / 지출가능 총액 * 100
@@ -525,6 +476,57 @@ function accountHistoryUpload(AccountUrl, index) {
       addChart(index, month, monthCostArray);
       addGraph(index, classifyArr, classifyNumArr);
     });
+}
+
+function createStory(data, newDateArr, historyElem, dateFindIndexArr) {
+  for (let i = 0; i < newDateArr.length; i++) {
+    const todayCost = 0;
+    const liEle = document.createElement("li");
+    const pEle = document.createElement("p");
+    const ulEle = document.createElement("ul");
+    const spanEle = document.createElement("span");
+    if (i === 0) {
+      pEle.textContent = "오늘";
+    } else if (i === 1) {
+      pEle.textContent = "어제";
+    } else {
+      pEle.textContent = date + "일";
+    }
+    liEle.appendChild(pEle);
+
+    for (let j = dateFindIndexArr[i]; j < dateFindIndexArr[i + 1]; j++) {
+      const li2Ele = document.createElement("li");
+      const span1Ele = document.createElement("span");
+      const span2Ele = document.createElement("span");
+      const hrEle = document.createElement("hr");
+
+      span1Ele.textContent = data.bankList[j].history;
+
+      if (data.bankList[j].income === "in") {
+        span2Ele.style.color = "red";
+        span2Ele.textContent =
+          "+" + data.bankList[j].price.toLocaleString("ko-KR");
+      } else {
+        span2Ele.textContent =
+          "-" + data.bankList[j].price.toLocaleString("ko-KR");
+        todayCost -= Number(data.bankList[j].price);
+      }
+      li2Ele.appendChild(span1Ele);
+      li2Ele.appendChild(span2Ele);
+      ulEle.appendChild(li2Ele);
+      ulEle.appendChild(hrEle);
+    }
+    todayCost = Math.abs(todayCost);
+    const thisMonth = Number(date[5] + date[6]);
+    if (thisMonth === month) {
+      monthCost += Number(todayCost);
+      monthCostArray.push(Number(todayCost));
+    }
+    spanEle.textContent = todayCost.toLocaleString("ko-KR") + "원 지출";
+    liEle.appendChild(spanEle);
+    liEle.appendChild(ulEle);
+    historyElem.appendChild(liEle);
+  }
 }
 
 function createClassify(
