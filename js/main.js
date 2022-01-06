@@ -379,6 +379,7 @@ function createMoneyBox(data, index) {
   });
 }
 
+// json 파일 받는 functioin
 function accountHistoryUpload(AccountUrl, index) {
   fetch(AccountUrl, {
     headers: {
