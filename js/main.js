@@ -10,7 +10,6 @@ let accountHistoryUrl = [
   "https://gyoheonlee.github.io/mobile-bank/data/bank-son.json",
 ];
 const phoneElem = document.querySelector(".phone");
-const accountElem = document.querySelector(".account");
 const sections = document.querySelectorAll("section");
 const accountManageElems = document.querySelectorAll(".account__manager");
 let start_x, end_x;
@@ -48,9 +47,7 @@ sections.forEach((section, index) => {
   });
   section.children[2].children[4].children[0].addEventListener(
     "click",
-    (event) => {
-      addMoneyBox(event, index, accountUrl);
-    }
+    addMoneyBox(index)
   );
   accountManageBtn.addEventListener("click", () => {
     openAccountManager(0);
@@ -225,7 +222,7 @@ function pushMoneyBox(i, index) {
   }
 }
 
-function addMoneyBox(event, index) {
+function addMoneyBox(index) {
   const moneyBoxLength =
     sections[index].children[1].children[1].children[0].children.length;
   const num = Number(moneyBoxLength) - 1;
