@@ -205,6 +205,7 @@ function pushMoneyBox(i, index) {
   const totalAmount2Elem =
     sections[index].children[0].children[1].children[1].children[1].children[0]
       .children[1];
+
   if (
     Number(fundAmount2.children[0].innerText) >= Number(targetAmount.innerText)
   ) {
@@ -446,17 +447,15 @@ function accountHistoryUpload(AccountUrl, index) {
         }
         classifyBaseArr.push(bank.classify);
       });
-      const set = new Set(dateArr);
       // 분류 중복 제거(set 배열)
-      const setClassify = new Set(classifyBaseArr);
       // 분류 중복 제거 배열
-      const classifyArr = [...setClassify];
+      const classifyArr = [...new Set(classifyBaseArr)];
       // 분류별 지출횟수
       const classifyNumArr = [];
       // 분류별 지출액
       const classifyCost = [];
       createClassify(data, classifyArr, classifyNumArr, classifyCost, index);
-      const newDateArr = [...set];
+      const newDateArr = [...new Set(dateArr)];
       let dateFindIndexArr = [];
       for (let k = 0; k < newDateArr.length; k++) {
         dateFindIndexArr.push(
