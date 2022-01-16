@@ -108,11 +108,10 @@ function addGraph(index, classifyArr, classifyNumArr) {
   const ctx =
     accountManageElems[index].children[2].children[1].children[1].children[0];
   const labels = [];
-  for (let i = 0; i < classifyArr.length; i += 2) {
-    if (i <= date) {
-      labels.push(classifyArr[i]);
-    }
-  }
+  classifyArr.forEach(
+    (classify, index) => i <= date && labels.push(classifyArr[index])
+  );
+
   const data = {
     labels: labels,
     datasets: [
